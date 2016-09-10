@@ -22,7 +22,8 @@ class FenwickTree2D {
         }
 
         T Sum(int a, int b, int c, int d) {
-            return Query(c, d) - Query(c, b - 1) - Query(a - 1, d) + Query(a - 1, b - 1);
+            return Query(c, d) - Query(c, b - 1)
+                   - Query(a - 1, d) + Query(a - 1, b - 1);
         }
 
     private:
