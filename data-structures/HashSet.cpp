@@ -9,13 +9,12 @@ class HashSet {
     public:
         HashSet() {
             srand(time(0));
-            kMod = kHashPrimes[rand() % 3];
-            hash_.resize(kMod);
-            cerr << kMod << endl;
+            mod_ = kHashPrimes[rand() % 3];
+            hash_.resize(mod_);
         }
 
-        void Insert(T value) {
-            int bucket = value % kMod;
+        void Insert(const T& value) {
+            int bucket = value % mod_;
             for (T current_value : hash_[bucket]) {
                 if (current_value == value) {
                     return;
@@ -25,7 +24,7 @@ class HashSet {
         }
 
         void Remove(T value) {
-            int bucket = value % kMod;
+            int bucket = value % mod_;
             for (T& current_value : hash_[bucket]) {
                 if (current_value == value) {
                     swap(current_value, hash_[bucket].back());
@@ -36,7 +35,7 @@ class HashSet {
         }
 
         bool Find(T value) {
-            int bucket = value % kMod;
+            int bucket = value % mod_;
             for (T current_value : hash_[bucket]) {
                 if (current_value == value) {
                     return true;
@@ -47,7 +46,7 @@ class HashSet {
 
     private:
         const int kHashPrimes[3] = {98317, 196613, 393241};
-        int kMod;
+        int mod_;
         vector<vector<T>> hash_;
 
 };

@@ -13,10 +13,10 @@ class FastReader {
 
         void ReadInt(int &number) {
             number = 0;
-            while (buffer_[position_] < '0' || buffer_[position_] > '9') {
+            while (!IsDigit(buffer_[position_])) {
                 AdvancePointer();
             }
-            while (buffer_[position_] >= '0' && buffer_[position_] <= '9') {
+            while (IsDigit(buffer_[position_])) {
                 number = number * 10 + buffer_[position_] - '0';
                 AdvancePointer();
             }
@@ -24,26 +24,30 @@ class FastReader {
 
         void ReadInt64(int64_t &number) {
             number = 0;
-            while (buffer_[position_] < '0' || buffer_[position_] > '9') {
+            while (!IsDigit(buffer_[position_])) {
                 AdvancePointer();
             }
-            while (buffer_[position_] >= '0' && buffer_[position_] <= '9') {
+            while (IsDigit(buffer_[position_])) {
                 number = number * 10 + buffer_[position_] - '0';
                 AdvancePointer();
             }
         }
 
     private:
-        const static int kMaxDim = 10000;
-        char buffer_[kMaxDim];
-        int position_;
-
         void AdvancePointer() {
             if (++position_ == kMaxDim) {
                 fread(buffer_, 1, kMaxDim, stdin);
                 position_ = 0;
             }
         }
+
+        bool IsDigit(char c) {
+            return c >= '0' && c <= '9';
+        }
+
+        static const int kMaxDim = 10000;
+        char buffer_[kMaxDim];
+        int position_;
 };
 
 int main() {
