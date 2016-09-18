@@ -31,7 +31,7 @@ class MinCostMaxFlowGraph {
 
                 int current_vertex = sink;
                 while (current_vertex != source) {
-                    C edge_capacity = edges_[previous_edge_[current_vertex]].capacity_;
+                    F edge_capacity = edges_[previous_edge_[current_vertex]].capacity_;
                     flow_added = min(flow_added, edge_capacity);
                     current_vertex = edges_[previous_edge_[current_vertex]].from_;
                 }
