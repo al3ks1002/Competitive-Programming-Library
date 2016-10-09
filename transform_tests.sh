@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 2 ]; then
-    echo "nu ma fute"
+    echo "usage: ./transform_tests.sh begin end"
     exit 1
 fi
 
