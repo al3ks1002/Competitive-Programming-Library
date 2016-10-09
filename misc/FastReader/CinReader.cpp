@@ -19,9 +19,9 @@ int main() {
     int n;
     cin >> n;
 
-    ll sol = 0;
+    int sol = 0;
     for (; n; n--) {
-        ll x;
+        int x;
         cin >> x;
         sol ^= x;
     }

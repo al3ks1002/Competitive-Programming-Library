@@ -14,7 +14,7 @@ using namespace std;
 #define fi first
 #define se second
 
-const int kMaxN = 1e7;
+const int kMaxN = 2e6;
 
 int main() {
     srand(time(0));
@@ -29,19 +29,15 @@ int main() {
         ofstream cout(str);
 
         int n;
-        if (i < 5) {
-            n = kMaxN / 100;
-        } else if (i < 8) {
-            n = kMaxN / 10;
+        if (i < 9) {
+            n = kMaxN / 4;
         } else {
-            n = kMaxN / 2;
+            n = kMaxN;
         }
 
         cout << n << '\n';
         for (; n; n--) {
-            ll x = rand();
-            ll y = rand();
-            cout << ((x << 32 )^ y) << '\n';
+            cout << rand() << '\n';
         }
     }
 

@@ -17,14 +17,14 @@ int main() {
     int n;
     scanf("%d", &n);
 
-    ll sol = 0;
+    int sol = 0;
     for (; n; n--) {
-        ll x;
-        scanf("%lld", &x);
+        int x;
+        scanf("%d", &x);
         sol ^= x;
     }
 
-    printf("%lld\n", sol);
+    printf("%d\n", sol);
 
     return 0;
 }

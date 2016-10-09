@@ -55,10 +55,10 @@ int main() {
     int n;
     reader.ReadInt(n);
 
-    int64_t sol = 0;
+    int sol = 0;
     for (; n; n--) {
-        int64_t x;
-        reader.ReadInt64(x);
+        int x;
+        reader.ReadInt(x);
         sol ^= x;
     }
 
