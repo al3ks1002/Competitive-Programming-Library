@@ -34,7 +34,7 @@ int main() {
         } else if (i < 8) {
             n = kMaxN / 10;
         } else {
-            n = kMaxN;
+            n = kMaxN / 2;
         }
 
         cout << n << '\n';
