@@ -1,0 +1,7 @@
+You are given two arrays with int32 numbers of size <= 1024.
+Find their longest common subsequence (not substring!).
+
+Input format:
+N M
+A line with N numbers representing the first array
+A line with M numbers representing the second array
