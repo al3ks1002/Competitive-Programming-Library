@@ -55,7 +55,7 @@ int main() {
                 ds.Unite(fx, fy);
             }
         } else {
-            cout << (ds.Find(x) == ds.Find(y) ? "DA" : "NU") << '\n';
+            printf("%s\n", ds.Find(x) == ds.Find(y) ? "YES" : "NO");
         }
     }
 

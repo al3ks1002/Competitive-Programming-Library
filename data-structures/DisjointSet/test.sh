@@ -27,7 +27,7 @@ for testfile in `find tests/ -name "test*.in" | sort --version-sort`; do
     testnumber=`echo $testfile | sed 's/[^0-9]//g'`
     message="Test ${testnumber} | ${runtime}"
 
-    wdiff out $ok > /dev/null
+    dwdiff out $ok > /dev/null
     if [ $? != 0 ]; then
         message="${message} | Wrong Answer"
     else

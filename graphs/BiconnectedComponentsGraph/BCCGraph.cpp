@@ -96,9 +96,13 @@ int main() {
     graph.FindBiconnectedComponents();
     vector<vector<int>> bcc = graph.GetBiconnectedComponents();
 
-    printf("%d\n", (int)bcc.size());
     for (auto& comp : bcc) {
         sort(comp.begin(), comp.end());
+    }
+    sort(bcc.begin(), bcc.end());
+
+    printf("%d\n", (int)bcc.size());
+    for (auto& comp : bcc) {
         for (auto x : comp) {
             printf("%d ", x);
         }

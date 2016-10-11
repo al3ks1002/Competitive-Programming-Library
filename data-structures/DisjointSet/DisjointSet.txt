@@ -1,0 +1,8 @@
+You are given N (<= 10^5) sets of numbers, set i containing only element i.
+M (<=10^6) operations are being performed:
+1 x y - unite x's set with y's set. It is not guaranteed that x and y are in different sets;
+2 x y - print "YES" if x and y are in the same set, "NO" otherwise.
+
+Input format:
+N M
+M lines, each containing an operation described earlier

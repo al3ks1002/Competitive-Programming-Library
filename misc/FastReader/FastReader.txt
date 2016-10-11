@@ -1,0 +1,1 @@
+You are given N (<= 2 * 10^6) int32 integers. Print their xor sum.

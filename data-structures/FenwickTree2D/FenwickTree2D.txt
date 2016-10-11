@@ -1,0 +1,10 @@
+You are given a matrix with N (<= 10^3) rows and M (<= 10^3) columns, where each element is between 1 and 10^9.
+Q (<= 10^5) operations are being performed:
+0 a b c d - get the sum from submatrix with upper-left corner in (a, b) and lower-right corner in (c, d);
+1 a b c - add c in cell (a,b) (c <= 10^9).
+All the matrix coordinates are valid.
+
+Input format:
+N M Q
+N lines, each with M elements, representing the matrix
+Q lines representing the operations

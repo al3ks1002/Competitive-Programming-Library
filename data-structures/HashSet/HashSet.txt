@@ -1,0 +1,10 @@
+You have an empty set.
+M (<= 10^6) operations are given:
+1 x - add element x in the set;
+2 x - delete element x in the set if exists;
+3 x - print 1 if element x is in the set, 0 otherwise.
+All elements are 32bit integers.
+
+Input format:
+M
+M lines representing the operations

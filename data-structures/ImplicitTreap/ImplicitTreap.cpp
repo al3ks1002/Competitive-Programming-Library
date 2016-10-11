@@ -203,9 +203,7 @@ class ImplicitTreap {
 
 int main() {
     int t;
-    int with_reverse;
-    scanf("%d %d\n", &t, &with_reverse);
-    assert(with_reverse <= 1);
+    scanf("%d\n", &t);
 
     ImplicitTreap<int> treap;
 

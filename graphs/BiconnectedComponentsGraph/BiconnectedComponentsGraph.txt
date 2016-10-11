@@ -1,0 +1,9 @@
+Given a graph with N (<= 10^5) vertices and M (<= 2 * 10^5) edges, print its biconnected components (considering articulation points).
+
+Input format:
+N M
+M lines representing the edges
+
+Output format:
+First line: X - number of biconnected components.
+X lines representing the components: each component has its vertices sorted, and the components are sorted by vertices (e.g. "2 5 6" appears before "5 6 9").

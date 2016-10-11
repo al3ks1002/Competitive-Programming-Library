@@ -1,0 +1,9 @@
+You are given an array of N (<= 10^5) elements (<= 10^9).
+M (<= 10^5) operations are being performed:
+0 x y - print the maximum element from interval [x, y];
+1 x y - add y to element from position x (y <= 10^9).
+
+Input format:
+N M
+1 line representing the array
+M lines representing the operations

@@ -1,0 +1,7 @@
+You are given a directed graph with N (<= 750) vertice and M (<= 12500) edges.
+Also you are given S (sink) and D (destination/sink).
+Find the min cost max flow.
+
+Input format:
+N M S D
+M lines representing edges (x y capacity cost)

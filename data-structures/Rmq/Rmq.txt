@@ -1,0 +1,8 @@
+You are given an array of N (<= 10^5) elements.
+M (<= 10^6) queries are being performed:
+x y - print the min element from interval [x, y].
+
+Input format:
+N M
+N lines representing the elements from the array
+M lines representing the queries

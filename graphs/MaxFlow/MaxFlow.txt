@@ -1,0 +1,5 @@
+You are given a directed graph with N (<= 1000) vertices and M (<= 5000) edges. Find the max flow (source = 1, sink = N).
+
+Input format:
+N M
+M lines representing the edges (x y capacity).

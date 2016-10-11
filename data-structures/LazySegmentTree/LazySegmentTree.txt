@@ -1,0 +1,8 @@
+You are given an array consisting of N (<= 10^5) elements, initially empty.
+Q (<= 10^5) operations are being performed:
+0 x y val - add val in interval [x, y] (val <= 10^7);
+1 x y - print the sum from interval [x, y].
+
+Input format:
+N Q
+Q lines representing the operations

@@ -1,0 +1,12 @@
+You are given an empty set.
+M (<= 10^5) are being performed:
+I x - insert x in the set;
+D x - delete x from the set if x is in the set;
+K x - print the x-th element from the set (if x is larger than the number of elements from the set, print "invalid");
+C x - count how many elements from the set are < x.
+
+For all x, |x| <= 10^9.
+
+Input format:
+M
+M lines representing the operations

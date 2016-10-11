@@ -1,0 +1,8 @@
+You have an empty list of words.
+You are given M (<= 10^5) operations:
+0 w - add an apparition of word w in the list;
+1 w - delete an apparition of word w from the list;
+2 w - print the number of apparitions of word w;
+3 w - print the largest prefix of word w with any word from the list;
+
+w is between 1 and 20 characters (lowercase english letters).
