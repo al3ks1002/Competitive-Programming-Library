@@ -17,7 +17,7 @@ if [ $? != 0 ]; then
     exit 1
 fi
 
-for testfile in `find tests/ -name "test*.in" | sort --version-sort`; do
+for testfile in `find tests -name "test*.in" | sort -V`; do
     touch out
     runtime=`(TIMEFORMAT='%3R'; time ./mlc < $testfile > out) 2>&1`
 
