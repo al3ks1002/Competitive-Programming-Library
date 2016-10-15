@@ -8,9 +8,9 @@ using namespace std;
 // vector<vector<int>> is too slow.
 // Unfortunately, you have to modify kMax manually.
 template<class F>
-class MinCostMaxFlowGraph {
+class MaxFlowGraph {
     public:
-        MinCostMaxFlowGraph(int num_vertices) : num_vertices_(num_vertices + 1) {
+        MaxFlowGraph(int num_vertices) : num_vertices_(num_vertices + 1) {
             previous_vertex_.resize(num_vertices_);
         }
 
@@ -97,7 +97,7 @@ int main() {
     int n, m;
     scanf("%d%d", &n, &m);
 
-    MinCostMaxFlowGraph<int> graph(n);
+    MaxFlowGraph<int> graph(n);
     for (; m; m--) {
         int from, to, capacity;
         scanf("%d%d%d", &from, &to, &capacity);
