@@ -1,0 +1,4 @@
+You are given a string representing a mathematical expression having the following characters:
+0,1,..,9,+,-,*,/,(,)
+
+You need to evaluate the expression and print the result. All numbers are <= 10^9 (including intermediary numbers).
