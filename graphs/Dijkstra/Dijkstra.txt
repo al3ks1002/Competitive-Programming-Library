@@ -1,0 +1,12 @@
+You are given a directed graph with N vertices (<= 50.000) and M edges(<= 250.000).
+Edges have costs (<= 20.000).
+
+You have to find the distances from vertex 1 to all other vertices.
+If a vertex is unreachable, the distance is considered 0.
+
+Input format:
+N M
+M lines representing the edges (x y cost).
+
+Output format:
+dist[2] dist[3] ... dist[N]
