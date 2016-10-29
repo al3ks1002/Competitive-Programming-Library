@@ -19,19 +19,27 @@ fi
 
 for testfile in `find tests -name "test*.in" | sort -V`; do
     touch out
+
+    runtime_error=1
     runtime=`(TIMEFORMAT='%3R'; time ./mlc < $testfile > out) 2>&1`
+    if [ "${#runtime}" = "5" ]; then
+        runtime_error=0
+    fi
 
     ok=`echo $testfile | cut -d \. -f 1 | cut -d \/ -f 2`
     ok="tests/${ok}.ok"
 
     testnumber=`echo $testfile | sed 's/[^0-9]//g'`
-    message="Test ${testnumber} | ${runtime}"
 
-    dwdiff out $ok > /dev/null
-    if [ $? != 0 ]; then
-        message="${message} | Wrong Answer"
+    if [ $runtime_error != 0 ]; then
+        message="Test ${testnumber} | 0.000 | Runtime Error"
     else
-        message="${message} | Correct"
+        dwdiff out $ok > /dev/null
+        if [ $? != 0 ]; then
+            message="Test ${testnumber} | ${runtime} | Wrong Answer"
+        else
+            message="Test ${testnumber} | ${runtime} | Correct"
+        fi
     fi
 
     echo $message
