@@ -12,14 +12,15 @@ class SegmentTree {
             segment_.resize(4 * size + 5);
         }
 
+        // The array must be indexed from 1
         template<typename Array>
         SegmentTree(int size, Array& array) : size_(size) {
             segment_.resize(4 * size + 5);
             Build(1, 1, size, array);
         }
 
-        void Update(int position, T valueue) {
-            return Update(1, 1, size_, position, valueue);
+        void Update(int position, T value) {
+            return Update(1, 1, size_, position, value);
         }
 
         T Query(int left, int right) {
