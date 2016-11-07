@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Tests your source code against some tests cases located in ./tests/ directory.
+# The tests must be in the following format: test$x.in test$x.ok
+
 if [ $# -ne 1 ]; then
     echo "Usage: ./test.sh my_source_code.cpp"
     exit 1
