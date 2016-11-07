@@ -1,0 +1,9 @@
+You are given a bipartite graph un N (<= 10^4) vertices on the left side, M (<= 10^4) vertices on the right side and E (<= 10^5) edges.
+You need to find the size of the maximum matching.
+
+Input format:
+N M E
+E lines containing an edge (x y), x e [1, N], y e [1, M]
+
+Output format:
+ans - maximum matching

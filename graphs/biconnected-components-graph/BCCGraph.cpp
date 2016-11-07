@@ -14,9 +14,9 @@ class BCCGraph {
             is_articulation_point_.resize(num_vertices + 1);
         }
 
-        void AddEdge(int to, int from) {
-            edges_[to].push_back(from);
+        void AddEdge(int from, int to) {
             edges_[from].push_back(to);
+            edges_[to].push_back(from);
         }
 
         void FindBiconnectedComponents() {

@@ -10,8 +10,8 @@ class DijkstraGraph {
             edges_.resize(num_vertices + 1);
         }
 
-        void AddEdge(int to, int from, T cost) {
-            edges_[to].push_back({from, cost});
+        void AddEdge(int from, int to, T cost) {
+            edges_[from].push_back({to, cost});
         }
 
         vector<T> GetDistances(int source) {
