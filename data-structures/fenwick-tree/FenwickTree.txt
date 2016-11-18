@@ -1,0 +1,14 @@
+You are given N (<=10^5) and M (<=2*10^5).
+An array of N numbers (<= 10^4) follows.
+Then M queries are given:
+0 a b - add value b to the a-th element in the array
+1 a b - get the sum from [a, b]
+2 a - find the first position k such that sum(1, k) == a, -1 if it doesn't exist
+
+Input format:
+N M
+N values representing the array
+M lines representing queries
+
+Output format:
+the answers for the queries
