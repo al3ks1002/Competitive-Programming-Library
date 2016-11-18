@@ -1,0 +1,9 @@
+You are given N (<= 10^5) and an array with N int32 elements.
+You need to print the size of the longest increasing subsequence.
+
+Input format:
+N
+a1 a2 ... aN
+
+Output format:
+answer
