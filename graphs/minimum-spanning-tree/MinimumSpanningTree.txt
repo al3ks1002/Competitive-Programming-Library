@@ -1,0 +1,10 @@
+You are given a connected weighted undirected graph with N (<= 200k) vertices
+and M (<= 400k) edges. Each edge has a cost between -1000 and 1000.
+You have to find the cost of the minimum spanning tree.
+
+Input format:
+N M
+M lines representing the edges(to from cost)
+
+Output format:
+cost - the cost of the mst
