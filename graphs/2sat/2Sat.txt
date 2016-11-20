@@ -1,0 +1,12 @@
+You are given a 2sat expression with N (<= 100k) terms and M (<= 200k) propositions.
+The proposition are given as a pair x, y.
+If a number is negative, that means it is reffered to the negative literal.
+
+You need to find N boolean values for the terms such that the 2sat is satisfied.
+
+Input format:
+N M
+M lines representing the propositions
+
+Output format:
+N boolean values representing the attributions for the terms
