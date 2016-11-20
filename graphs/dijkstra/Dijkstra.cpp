@@ -15,40 +15,39 @@ class DijkstraGraph {
         }
 
         vector<T> GetDistances(int source) {
-            vector<T> distance_(num_vertices_ + 1, kMaxInf);
-            vector<bool> visited_(num_vertices_ + 1, 0);
-            priority_queue<pair<T, int>, vector<pair<T, int>>, greater<pair<T, int>>> q;
+            vector<T> distance(num_vertices_ + 1, kMaxInf);
+            vector<bool> visited(num_vertices_ + 1, 0);
+            priority_queue<pair<T, int>, vector<pair<T, int>>, greater<pair<T, int>>> queue;
 
-            distance_[source] = 0;
-            q.push({0, source});
+            distance[source] = 0;
+            queue.push({0, source});
 
+            while (!queue.empty()) {
+                int x = queue.top().second;
+                queue.pop();
 
-            while (!q.empty()) {
-                int x = q.top().second;
-                q.pop();
-
-                if (visited_[x]) {
+                if (visited[x]) {
                     continue;
                 }
-                visited_[x] = 1;
+                visited[x] = 1;
 
                 for (auto it : edges_[x]) {
                     int y = it.first;
                     T cost = it.second;
-                    if (distance_[x] + cost < distance_[y]) {
-                        distance_[y] = distance_[x] + cost;
-                        q.push({distance_[y], y});
+                    if (distance[x] + cost < distance[y]) {
+                        distance[y] = distance[x] + cost;
+                        queue.push({distance[y], y});
                     }
                 }
             }
 
             for (int i = 1; i <= num_vertices_; i++) {
-                if (distance_[i] == kMaxInf) {
-                    distance_[i] = -1;
+                if (distance[i] == kMaxInf) {
+                    distance[i] = -1;
                 }
             }
 
-            return distance_;
+            return distance;
         }
 
     private:
