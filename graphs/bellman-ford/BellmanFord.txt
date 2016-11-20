@@ -1,0 +1,11 @@
+You are given a directed graph with N (<= 50k) vertices and M (<= 250k) edges.
+You need to print the minimum distance from 1 to vertices 2,3,...,N.
+If there is a negative cycle, you need to print "Ciclu negativ!".
+It is guaranteed that there is a path from 1 to every vertex from the graph.
+
+Input format:
+N M
+M lines representing the edges (abs(cost) <= 1000)
+
+Output format:
+N - 1 values representing the distances or "Ciclu negativ!"
