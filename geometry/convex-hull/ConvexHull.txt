@@ -1,0 +1,10 @@
+You are given N (<= 120k) points (float values).
+Find their convex hull.
+
+Input format:
+N
+N lines representing the points
+
+Output format:
+M - the number of points from the convex hull
+M lines representing the points from the convex hull in trigonometric order
