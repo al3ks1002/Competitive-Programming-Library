@@ -1,0 +1,9 @@
+You are given N (<= 100k) points (with coordinates in [-1e9, 1e9]).
+You need to find the distance between the closest pair (Euclidean distance).
+
+Input format:
+N
+N lines representing the points
+
+Output format:
+distance - a float value representing the answe with error at most 1e-6
