@@ -1,0 +1,9 @@
+You are given a multigraph with N (<= 100k) vertices and M (<= 500k) edges.
+You need to find an eulerian cycle. If it doesn't exist, print -1.
+
+Input format:
+N M
+M lines representing the edges
+
+Output format:
+an array representing the cycle or -1
