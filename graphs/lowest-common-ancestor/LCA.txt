@@ -1,0 +1,10 @@
+You are given a tree with N (<= 100k) vertices and M (<= 100k) queries.
+Each query contains two vertices: x, y. You need to print the LCA(x, y).
+
+Input format:
+N M
+N - 1 numbers, f[i] representing the father of the i + 1 vertex, i e [1, N]
+M lines representing the queries
+
+Output format:
+M lines representing the LCAs

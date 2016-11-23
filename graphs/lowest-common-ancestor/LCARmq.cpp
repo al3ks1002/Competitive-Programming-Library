@@ -78,24 +78,74 @@ class Rmq {
         }
 };
 
+class LCATree {
+    public:
+        LCATree(int num_vertices, int root) : num_vertices_(num_vertices), root_(root) {
+            sons_.resize(num_vertices_ + 1);
+        }
+
+        void AddEdge(int father, int son) {
+            sons_[father].push_back(son);
+        }
+
+        void Precalculate() {
+            first_apparition_.resize(num_vertices_ + 1, 0);
+            level_.resize(num_vertices_ + 1, 0);
+            DFS(root_);
+            rmq_ = Rmq<int>(euler_path_.size(), euler_path_, level_);
+        }
+
+        int GetLCA(int x, int y) {
+            x = first_apparition_[x];
+            y = first_apparition_[y];
+
+            if (x > y) {
+                swap(x, y);
+            }
+
+            return rmq_.Get(x, y);
+        }
+
+    private:
+        int num_vertices_;
+        int root_;
+        vector<vector<int>> sons_;
+        vector<int> euler_path_;
+        vector<int> first_apparition_;
+        vector<int> level_;
+        Rmq<int> rmq_;
+
+        void DFS(int vertex) {
+            euler_path_.push_back(vertex);
+            first_apparition_[vertex] = euler_path_.size() - 1;
+
+            for (auto son : sons_[vertex]) {
+                level_[son] = level_[vertex] + 1;
+                DFS(son);
+                euler_path_.push_back(vertex);
+            }
+        }
+};
+
 int main() {
     cin.sync_with_stdio(false);
 
     int n, m;
     scanf("%d%d", &n, &m);
 
-    vector<int> v(n);
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &v[i]);
+    LCATree tree(n, 1);
+    for (int i = 2; i <= n; i++) {
+        int f;
+        scanf("%d", &f);
+        tree.AddEdge(f, i);
     }
 
-    Rmq<int> rmq(n, v);
+    tree.Precalculate();
+
     for (; m; m--) {
         int x, y;
         scanf("%d%d", &x, &y);
-        x--;
-        y--;
-        printf("%d\n", rmq.Get(x, y));
+        printf("%d\n", tree.GetLCA(x, y));
     }
 
     return 0;
