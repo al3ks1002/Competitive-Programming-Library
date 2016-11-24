@@ -1,0 +1,9 @@
+You are given a system with N (<= 300) equations and M (<= 300) unknowns.
+You need to find a solution of this system (1e-10 precision)
+
+Input format:
+N M
+N lines with M + 1 numbers each representing the equation (M coefficients and the result)
+
+Output format:
+M numbers representing the unknowns or the string 'Imposibil' if the system doesn't have a solution

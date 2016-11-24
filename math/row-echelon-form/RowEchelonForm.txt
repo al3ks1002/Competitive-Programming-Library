@@ -1,0 +1,9 @@
+You are given N (<= 100k) numbers with values <= 10^18.
+You need to find the subset with maximum xor value.
+
+Input format:
+N
+N values representing the numbers
+
+Output format:
+answer - max xor subset
