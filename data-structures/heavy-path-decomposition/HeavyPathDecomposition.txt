@@ -1,0 +1,9 @@
+You are given a tree with N vertices (<= 100k), each vertex having a value (<= 2e9).
+You are also given M (<= 100k) operations:
+0 x y - update the value of vertex x with y
+1 x y - get the max value from the chain from x - y
+
+Input format:
+N M
+a line containing N values representing the vertices values
+M lines representing the operations
