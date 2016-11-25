@@ -1,0 +1,11 @@
+You are given a text A with max 1e6 characters.
+You are also given a dictionary of N (<= 100) words (each with max 1e4 characters).
+For each word, you need to print how many times it appears in A.
+
+Input format:
+A
+N
+N lines representing the words
+
+Output format:
+N lines representing the answers
