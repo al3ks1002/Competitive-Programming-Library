@@ -97,9 +97,6 @@ class Gauss {
 int main() {
     cin.sync_with_stdio(false);
 
-    ifstream cin("gauss.in");
-    ofstream cout("gauss.out");
-
     int n, m;
     cin >> n >> m;
 

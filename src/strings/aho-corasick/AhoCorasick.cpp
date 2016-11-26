@@ -124,9 +124,6 @@ class AhoCorasickAutomaton {
 int main() {
     cin.sync_with_stdio(false);
 
-    ifstream cin("ahocorasick.in");
-    ofstream cout("ahocorasick.out");
-
     string text;
     cin >> text;
 

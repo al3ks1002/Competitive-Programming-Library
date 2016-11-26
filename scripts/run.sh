@@ -3,12 +3,13 @@
 # Tests your source code against some tests.
 # The tests must be in the following format: test$x.in test$x.ok
 
+# Color codes for colored echo.
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 
 # Function needed to show the usage.
 usage() {
-    echo "Usage -s source_file -t tests_directory [-c checker]"
+    echo "Usage -s source_file -t tests_directory [-c checker]."
     exit 1
 }
 
@@ -37,6 +38,13 @@ while getopts ":s:t:c:" opt; do
             ;;
     esac
 done
+
+# Checks if the source file and tests directory are not empty.
+if [[ -z $sourcefile || -z $tests ]]; then
+    echo "Source file and tests directory arguments are mandatory."
+    usage
+    exit 1
+fi
 
 # Checks if the source file exists.
 if [[ ! -e $sourcefile ]]; then
