@@ -15,7 +15,7 @@ ORANGE='\033[0;33m'
 usage() {
     # -m stands for the menu: 1 - show menu, 0 - don't show.
     # -i stands for the source file index that you need to run.
-    echo "Usage [-m <0/1>] [-i index]."
+    printf "${RED}Usage [-m <0/1>] [-i index].\n"
     exit 1
 }
 
@@ -60,63 +60,68 @@ run_program() {
         command="${command} -c $checker"
     fi
 
-    #Runs the source file.
+    # Runs the source file.
     eval $command
 }
 
-menu=1
+main() {
+    # By default, the menu is on.
+    menu=1
 
-# Parses the parameters.
-while getopts ":m:i:" opt; do
-    case $opt in
-        m)
-            # Gets the source file.
-            menu=$OPTARG
-            ;;
-        i)
-            # Gets the tests directory.
-            user_index=$OPTARG
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG" >&2
-            usage
-            ;;
-        :)
-            echo "Option -$OPTARG requires an argument." >&2
-            usage
-            ;;
-    esac
-done
+    # Parses the parameters.
+    while getopts ":m:i:" opt; do
+        case $opt in
+            m)
+                # Gets the source file.
+                menu=$OPTARG
+                ;;
+            i)
+                # Gets the tests directory.
+                user_index=$OPTARG
+                ;;
+            \?)
+                printf "${RED}Invalid option: -$OPTARG\n" >&2
+                usage
+                ;;
+            :)
+                printf "${RED}Option -$OPTARG requires an argument.\n" >&2
+                usage
+                ;;
+        esac
+    done
 
-# $index will represent the max number of source files.
-index=0
+    # $index will represent the max number of source files.
+    index=0
 
-# Gets all the source files.
-for file in `find ../src -name "*.cpp"`; do
-    if (( $menu != 0 )); then
-        printf "${ORANGE}[$index] $file\n"
-    fi
-    ((++index))
-done
+    # Gets all the source files.
+    for file in $(find ../src -name "*.cpp"); do
+        if (( $menu != 0 )); then
+            printf "${ORANGE}[$index] $file\n"
+        fi
+        ((++index))
+    done
 
-# Gets the user index.
-if [[ -z $user_index ]]; then
-    user_index=-1
-    get_user_index
-else
-    if ((user_index < 0 || user_index >= index)); then
-        printf "${RED}Invalid index.\n"
+    # Gets the user index.
+    if [[ -z $user_index ]]; then
+        user_index=-1
         get_user_index
+    else
+        if ((user_index < 0 || user_index >= index)); then
+            printf "${RED}Invalid index.\n"
+            get_user_index
+        fi
     fi
-fi
 
-# Finds the source file matches with the user index and runs it in "run_program" function.
-index=0
-for file in `find ../src -name "*.cpp"`; do
-    if ((index == user_index)); then
-        run_program $user_index $file
-        break
-    fi
-    ((++index))
-done
+    # Finds the source file matches with the user index and runs it in "run_program" function.
+    index=0
+    for file in $(find ../src -name "*.cpp"); do
+        if ((index == user_index)); then
+            run_program $user_index $file
+            break
+        fi
+        ((++index))
+    done
+}
 
+# Runs main with the script arguments.
+main "$@"
