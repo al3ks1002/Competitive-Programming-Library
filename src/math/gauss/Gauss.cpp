@@ -113,7 +113,7 @@ int main() {
         cout << "Imposibil\n";
     } else {
         for (auto it : ans) {
-            cout << fixed << setprecision(10) << it << " ";
+            cout << fixed << setprecision(10) << it<< " ";
         }
     }
 

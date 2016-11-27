@@ -56,6 +56,7 @@ class PointSet {
 };
 
 int main() {
+    srand(time(0));
     cin.sync_with_stdio(false);
 
     int n;
@@ -69,7 +70,8 @@ int main() {
     }
 
     PointSet s(points);
-    cout << fixed << setprecision(7) << s.FindClosestPair() << '\n';
+    double answer = s.FindClosestPair();
+    cout << fixed << setprecision(7) << answer << '\n';
 
     return 0;
 }

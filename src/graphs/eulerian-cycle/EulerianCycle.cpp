@@ -16,7 +16,6 @@ class EulerianGraph {
             edge_index_++;
         }
 
-        // Returns an empty vector if there isn't an eulerian cycle
         vector<int> FindEulerianCycle() {
             vector<int> eulerian_cycle;
             if (!IsConnected() || !IsEulerian()) {

@@ -131,7 +131,7 @@ for input in $(find $tests -name "test*.in" | sort -V); do
             # 0 - okay;
             # 1 - wrong;
             # 2 - something went bad when running the checker (probably the args were invalid).
-            result=$(./checker_exec input output $ok)
+            result=$(./checker_exec $input output $ok)
 
             # Gets the message based on the checker exit code.
             if [[ $? == 0 ]]; then
