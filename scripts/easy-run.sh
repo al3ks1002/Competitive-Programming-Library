@@ -4,6 +4,8 @@
 # With the run.sh script you had to write all the arguments (source file, tests dir, checker).
 # In easy-run.sh you just choose the source file from a list and the script does the rest.
 
+# !! If you want to use this, you need to leave the repository structure as it is.
+
 # Color codes for colored echo.
 RED='\033[0;31m'
 GREEN='\033[0;32m'
