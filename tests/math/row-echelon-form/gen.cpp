@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -9,7 +9,6 @@ const int kVal = 1e4;
 // Not really a good generator
 int main() {
     srand(time(0));
-    cin.sync_with_stdio(false);
 
     for (int i = 0; i < 10; i++) {
         string test = "test";

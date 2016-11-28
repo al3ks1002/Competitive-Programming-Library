@@ -1,18 +1,7 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
-
-#define ll int64_t
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define pdd pair<ld, ld>
-#define all(x) (x).begin(), (x).end()
-#define fi first
-#define se second
 
 const int kMaxN = 1e5;
 const int kMaxQ = 1e5;
@@ -20,14 +9,13 @@ const int kMaxVal = 1e7;
 
 int main() {
     srand(time(0));
-    cin.sync_with_stdio(false);
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 1; i <= 10; i++) {
         string test = "test";
-        stringstream mlc;
+        stringstream my_stream;
         string in = ".in";
-        mlc << test << i << in;
-        string str = mlc.str();
+        my_stream << test << i << in;
+        string str = my_stream.str();
         ofstream cout(str);
 
         int q;
