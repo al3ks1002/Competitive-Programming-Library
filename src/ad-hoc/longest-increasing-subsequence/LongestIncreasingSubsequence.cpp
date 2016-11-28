@@ -1,12 +1,15 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
+#include <limits>
+#include <vector>
 
 using namespace std;
 
 template<class T>
 class LIS {
     public:
-        LIS(const vector<T>& array) : array_(array) {}
+        explicit LIS(const vector<T>& array) : array_(array) {}
 
         vector<T> FindLIS() {
             vector<T> v;

@@ -1,19 +1,20 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <vector>
 
 using namespace std;
 
-//Class that represents a 2D Fenwick tree.
 template<class T>
 class FenwickTree2D {
     public:
-        FenwickTree2D(int rows, int columns) : rows_(rows), columns_(columns) {
+        FenwickTree2D(const int rows, const int columns) :
+            rows_(rows), columns_(columns) {
             fenwick_.resize(rows + 1);
             for (int i = 1; i <= rows; i++) {
                 fenwick_[i].resize(columns + 1, 0);
             }
         }
 
-        void Update(int x, int y, T value) {
+        void Update(const int x, const int y, const T value) {
             for (int i = x; i <= rows_; i += Lsb(i)) {
                 for (int j = y; j <= columns_; j += Lsb(j)) {
                     fenwick_[i][j] += value;
@@ -21,21 +22,16 @@ class FenwickTree2D {
             }
         }
 
-        T Sum(int a, int b, int c, int d) {
-            return Query(c, d) - Query(c, b - 1)
-                   - Query(a - 1, d) + Query(a - 1, b - 1);
+        T Sum(const int a, const int b, const int c, const int d) const {
+            return Query(c, d) - Query(c, b - 1) - Query(a - 1, d) + Query(a - 1, b - 1);
         }
 
     private:
-        const int rows_;
-        const int columns_;
-        vector<vector<T>> fenwick_;
-
-        int Lsb(int x) const {
+        int Lsb(const int x) const {
             return x & (-x);
         }
 
-        T Query(int x, int y) {
+        T Query(const int x, const int y) const {
             if (x <= 0 || y <= 0) {
                 return 0;
             }
@@ -46,8 +42,13 @@ class FenwickTree2D {
                     result += fenwick_[i][j];
                 }
             }
+
             return result;
         }
+
+        const int rows_;
+        const int columns_;
+        vector<vector<T>> fenwick_;
 };
 
 int main() {
@@ -77,5 +78,6 @@ int main() {
             fenwick.Update(a, b, c);
         }
     }
+
     return 0;
 }

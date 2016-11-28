@@ -1,13 +1,16 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class RollingHash {
     public:
-        RollingHash(const string& text) : text_(text) {}
+        explicit RollingHash(const string& text) : text_(text) {}
 
-        pair<int, vector<int>> GetMatchingIndexes(const string& pattern, int max_index_count) {
+        pair<int, vector<int>> GetMatchingIndexes(const string& pattern,
+        const int max_index_count) {
             int count = 0;
             vector<int> indexes;
             indexes.reserve(max_index_count);
@@ -49,10 +52,6 @@ class RollingHash {
         }
 
     private:
-        const int kHashPrimes[2] = {100003, 666013};
-        static const int kBase = 137;
-        string text_;
-
         pair<int, int> GetCode(const string& pattern) {
             int match[2] = {0, 0};
             for (int i = 0; i < (int)pattern.size(); i++) {
@@ -63,7 +62,7 @@ class RollingHash {
             return {match[0], match[1]};
         }
 
-        pair<int, int> GetPoweredBase(int length) {
+        pair<int, int> GetPoweredBase(const int length) {
             int powered_base[2] = {1, 1};
             for (int i = 0; i < length - 1; i++) {
                 for (int j = 0; j < 2; j++) {
@@ -73,20 +72,21 @@ class RollingHash {
             return {powered_base[0], powered_base[1]};
         }
 
-        long long GetCombinedCode(int x, int y) {
+        long long GetCombinedCode(const int x, const int y) const {
             return 1LL * x * kHashPrimes[1] + y;
         }
 
-        long long GetCombinedCode(pair<int, int> p) {
+        long long GetCombinedCode(const pair<int, int> p) const {
             return GetCombinedCode(p.first, p.second);
         }
+
+        static const int kBase = 137;
+        const int kHashPrimes[2] = {100003, 666013};
+        const string text_;
 };
 
 int main() {
     cin.sync_with_stdio(false);
-
-    /* ifstream cin("strmatch.in"); */
-    /* ofstream cout("strmatch.out"); */
 
     string pattern;
     cin >> pattern;

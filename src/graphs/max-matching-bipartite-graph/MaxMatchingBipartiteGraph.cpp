@@ -1,20 +1,20 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 class MaxMatchingBipartiteGraph {
     public:
-        MaxMatchingBipartiteGraph(int num_vertices_left_, int num_vertices_right_) :
-            num_vertices_left_(num_vertices_left_),
-            num_vertices_right_(num_vertices_right_) {
+        MaxMatchingBipartiteGraph(const int num_vertices_left, const int num_vertices_right) :
+            num_vertices_left_(num_vertices_left),
+            num_vertices_right_(num_vertices_right) {
             edges_.resize(num_vertices_left_ + 1);
             visited_.resize(num_vertices_left_ + 1, 0);
             match_for_left_.resize(num_vertices_left_ + 1, 0);
             match_for_right_.resize(num_vertices_right_ + 1, 0);
         }
 
-        void AddEdge(int from, int to) {
+        void AddEdge(const int from, const int to) {
             edges_[from].push_back(to);
         }
 
@@ -34,23 +34,16 @@ class MaxMatchingBipartiteGraph {
             return matching;
         }
 
-        int GetMatchForLeft(int vertex) {
+        int GetMatchForLeft(const int vertex) const {
             return match_for_left_[vertex];
         }
 
-        int GetMatchForRight(int vertex) {
+        int GetMatchForRight(const int vertex) const {
             return match_for_right_[vertex];
         }
 
     private:
-        int num_vertices_left_;
-        int num_vertices_right_;
-        vector<vector<int>> edges_;
-        vector<bool> visited_;
-        vector<int> match_for_left_;
-        vector<int> match_for_right_;
-
-        bool PairUp(int vertex) {
+        bool PairUp(const int vertex) {
             if (visited_[vertex]) {
                 return 0;
             }
@@ -72,6 +65,13 @@ class MaxMatchingBipartiteGraph {
 
             return 0;
         }
+
+        const int num_vertices_left_;
+        const int num_vertices_right_;
+        vector<vector<int>> edges_;
+        vector<bool> visited_;
+        vector<int> match_for_left_;
+        vector<int> match_for_right_;
 };
 
 int main() {

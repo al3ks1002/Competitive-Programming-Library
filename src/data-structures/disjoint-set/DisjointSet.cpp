@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
 class DisjointSet {
     public:
-        DisjointSet(int size) : size_(size + 1) {
+        explicit DisjointSet(const int size) : size_(size + 1) {
             father_.resize(size_);
             rank_.resize(size_);
             for (int i = 0; i < size_; i++) {
@@ -14,7 +14,7 @@ class DisjointSet {
             }
         }
 
-        int Find(int x) {
+        int Find(const int x) {
             if (father_[x] != x) {
                 father_[x] = Find(father_[x]);
             }
@@ -22,7 +22,7 @@ class DisjointSet {
         }
 
         // x and y must be roots
-        void Unite(int x, int y) {
+        void Unite(const int x, const int y) {
             if (rank_[x] < rank_[y]) {
                 father_[x] = y;
             } else {
@@ -34,7 +34,7 @@ class DisjointSet {
         }
 
     private:
-        int size_;
+        const int size_;
         vector<int> father_;
         vector<int> rank_;
 };

@@ -1,5 +1,9 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <limits>
+#include <queue>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
@@ -11,20 +15,21 @@ using namespace std;
 template<class F, class C>
 class MinCostMaxFlowGraph {
     public:
-        MinCostMaxFlowGraph(int num_vertices) : num_vertices_(num_vertices + 1) {
-            neighbours_.resize(num_vertices_);
-            previous_edge_.resize(num_vertices_);
-            distance_.resize(num_vertices_);
+        explicit MinCostMaxFlowGraph(const int num_vertices) :
+            num_vertices_(num_vertices) {
+            neighbours_.resize(num_vertices_ + 1);
+            previous_edge_.resize(num_vertices_ + 1);
+            distance_.resize(num_vertices_ + 1);
         }
 
-        void AddEdge(int from, int to, F capacity, C cost) {
+        void AddEdge(const int from, const int to, const F capacity, const C cost) {
             neighbours_[from].push_back(edges_.size());
             edges_.emplace_back(from, to, capacity, cost);
             neighbours_[to].push_back(edges_.size());
             edges_.emplace_back(to, from, 0, -cost);
         }
 
-        pair<F, C> GetMinCostMaxFlow(int source, int sink) {
+        pair<F, C> GetMinCostMaxFlow(const int source, const int sink) {
             F max_flow = 0;
             C min_cost = 0;
             while (PushFlow(source, sink)) {
@@ -61,7 +66,7 @@ class MinCostMaxFlowGraph {
             C cost_;
         };
 
-        bool PushFlow(int source, int sink) {
+        bool PushFlow(const int source, const int sink) {
             fill(previous_edge_.begin(), previous_edge_.end(), -1);
             fill(distance_.begin(), distance_.end(), numeric_limits<C>::max());
             vector<bool> in_queue(num_vertices_, false);
@@ -100,7 +105,7 @@ class MinCostMaxFlowGraph {
             return distance_[sink] != numeric_limits<C>::max();
         }
 
-        int num_vertices_;
+        const int num_vertices_;
         vector<Edge> edges_;
         vector<vector<int>> neighbours_;
         vector<int> previous_edge_;

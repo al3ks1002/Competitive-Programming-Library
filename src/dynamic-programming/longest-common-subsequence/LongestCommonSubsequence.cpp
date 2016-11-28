@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -6,9 +8,8 @@ template<typename T>
 class LongestCommonSubsequence {
     public:
         // Constructor takes 0 indexed vectors.
-        LongestCommonSubsequence(const vector<T>& a, const vector<T>& b) {
-            n_ = a.size();
-            m_ = b.size();
+        LongestCommonSubsequence(const vector<T>& a, const vector<T>& b) :
+            n_(a.size()), m_(b.size()) {
             a_.resize(n_ + 1);
             for (int i = 0; i < n_; i++) {
                 a_[i + 1] = a[i];
@@ -57,8 +58,8 @@ class LongestCommonSubsequence {
         }
 
     private:
-        int n_;
-        int m_;
+        const int n_;
+        const int m_;
         vector<T> a_;
         vector<T> b_;
         vector<vector<int>> dp_;
@@ -69,12 +70,14 @@ int main() {
     scanf("%d%d", &n, &m);
 
     vector<int> a(n);
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++) {
         scanf("%d", &a[i]);
+    }
 
     vector<int> b(m);
-    for (int i = 0; i < m; i++)
+    for (int i = 0; i < m; i++) {
         scanf("%d", &b[i]);
+    }
 
     LongestCommonSubsequence<int> lcs(a, b);
     printf("%d\n", lcs.FindLCS());

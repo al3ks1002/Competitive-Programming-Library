@@ -1,65 +1,50 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <cstdlib>
+#include <ctime>
+#include <utility>
 
 using namespace std;
 
-// Class that represents a treap.
 template<class T>
 class Treap {
     public:
-        /**
-         * Default constructor for Treap.
-         */
         Treap() {
             srand(time(0));
             root_ = nullptr;
         }
 
-        /**
-         * Finds if a value is in the treap.
-         */
-        bool Find(T value) const {
+        // Finds if a value is in the treap.
+        bool Find(const T value) const {
             return FindValue(root_, value);
         }
 
-        /**
-         * Inserts a value in the treap (if it's already
-         * in the treap, nothing happens).
-         */
-        void Insert(T value) {
+        // Inserts a value in the treap (if it's already
+        // in the treap, nothing happens).
+        void Insert(const T value) {
             if (Find(value)) {
                 return;
             }
             root_ = InsertValue(value);
         }
 
-        /**
-         * Removes a value from the treap (if it's not
-         * in the treap, nothing happens).
-         */
-        void Remove(T value) {
+        // Removes a value from the treap (if it's not
+        // in the treap, nothing happens).
+        void Remove(const T value) {
             root_ = RemoveValue(root_, value);
         }
 
-        /**
-         * Finds the kth value from the treap
-         * (preconditions: k must be in [1, treap.Size()]).
-         */
-        T KthElement(int k) const {
+        // Finds the kth value from the treap
+        // (preconditions: k must be in [1, treap.Size()]).
+        T KthElement(const int k) const {
             return FindKthElement(root_, k);
         }
 
-        /**
-         * Counts how many values from the treap are
-         * smaller or equal than the given value.
-         */
-        int SmallerOrEqualThan(T value) const {
+        // Counts how many values from the treap are
+        // smaller or equal than the given value.
+        int SmallerOrEqualThan(const T value) const {
             return CountSmallerOrEqualThan(root_, value);
         }
 
-        /**
-         * Returns the size of the treap.
-         */
         int Size() const {
             return GetSubtreeSize(root_);
         }
@@ -72,7 +57,7 @@ class Treap {
             Node* right_;
             int subtree_;
 
-            Node(int value) : value_(value), left_(nullptr), right_(nullptr),
+            explicit Node(const int value) : value_(value), left_(nullptr), right_(nullptr),
                 priority_((rand() << 16) ^ rand()), subtree_(1) {}
         };
 
@@ -84,11 +69,10 @@ class Treap {
             if (node == nullptr) {
                 return;
             }
-            node->subtree_ = 1 + GetSubtreeSize(node->left_)
-                             + GetSubtreeSize(node->right_);
+            node->subtree_ = 1 + GetSubtreeSize(node->left_) + GetSubtreeSize(node->right_);
         }
 
-        pair<Node*, Node*> Split(Node* current_node, T split_value) {
+        pair<Node*, Node*> Split(Node* current_node, const T split_value) {
             if (current_node == nullptr) {
                 return {nullptr, nullptr};
             }
@@ -128,7 +112,7 @@ class Treap {
             }
         }
 
-        bool FindValue(Node* node, T value) const {
+        bool FindValue(Node* node, const T value) const {
             if (node == nullptr) {
                 return false;
             }
@@ -142,12 +126,12 @@ class Treap {
             return true;
         }
 
-        Node* InsertValue(T value) {
+        Node* InsertValue(const T value) {
             pair<Node*, Node*> roots = Split(root_, value);
             return Merge(Merge(roots.first, new Node(value)), roots.second);
         }
 
-        Node* RemoveValue(Node* node, T value) {
+        Node* RemoveValue(Node* node, const T value) {
             if (node == nullptr) {
                 return nullptr;
             }
@@ -166,7 +150,7 @@ class Treap {
             return node;
         }
 
-        T FindKthElement(Node* node, int k) const {
+        T FindKthElement(Node* node, const int k) const {
             int left_subtree_size = GetSubtreeSize(node->left_);
             if (left_subtree_size + 1 == k) {
                 return node->value_;
@@ -179,7 +163,7 @@ class Treap {
             }
         }
 
-        int CountSmallerOrEqualThan(Node* node, T value) const {
+        int CountSmallerOrEqualThan(Node* node, const T value) const {
             if (node == nullptr) {
                 return 0;
             }

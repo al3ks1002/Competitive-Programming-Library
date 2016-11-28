@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
@@ -8,28 +8,28 @@ using namespace std;
 template<typename T>
 class SegmentTree {
     public:
-        SegmentTree(int size) : size_(size) {
+        explicit SegmentTree(const int size) : size_(size) {
             segment_.resize(4 * size + 5);
         }
 
         // The array must be indexed from 1
         template<typename Array>
-        SegmentTree(int size, Array& array) : size_(size) {
+        SegmentTree(const int size, const Array& array) : size_(size) {
             segment_.resize(4 * size + 5);
             Build(1, 1, size, array);
         }
 
-        void Update(int position, T value) {
+        void Update(const int position, const T value) {
             return Update(1, 1, size_, position, value);
         }
 
-        T Query(int left, int right) {
+        T Query(const int left, const int right) const {
             return Query(1, 1, size_, left, right);
         }
 
     private:
         template<typename Array>
-        void Build(int node, int left, int right, Array& v) {
+        void Build(const int node, const int left, const int right, const Array& v) {
             if (left == right) {
                 segment_[node] = v[left];
                 return;
@@ -45,7 +45,8 @@ class SegmentTree {
             segment_[node] = TreeFunction(segment_[left_son], segment_[right_son]);
         }
 
-        void Update(int node, int left, int right, int position, T value) {
+        void Update(const int node, const int left, const int right,
+                    const int position, const T value) {
             if (left == right) {
                 segment_[node] = value;
                 return;
@@ -64,7 +65,7 @@ class SegmentTree {
             segment_[node] = TreeFunction(segment_[left_son], segment_[right_son]);
         }
 
-        T Query(int node, int left, int right, int a, int b) {
+        T Query(const int node, const int left, const int right, const int a, const int b) const {
             if (left >= a && right <= b) {
                 return segment_[node];
             }
@@ -86,7 +87,7 @@ class SegmentTree {
             return TreeFunction(x, y);
         }
 
-        T TreeFunction(T x, T y) {
+        T TreeFunction(const T x, const T y) const {
             return (x > y) ? x : y;
         }
 
@@ -99,8 +100,9 @@ int main() {
     scanf("%d%d", &n, &q);
 
     vector<int> v(n + 5);
-    for (int i = 1; i <= n; i++)
+    for (int i = 1; i <= n; i++) {
         scanf("%d", &v[i]);
+    }
 
     SegmentTree<int> seg(n, v);
 

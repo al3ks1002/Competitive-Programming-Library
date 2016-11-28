@@ -3,3 +3,6 @@ You are given a directed graph with N (<= 1000) vertices and M (<= 5000) edges. 
 Input format:
 N M
 M lines representing the edges (x y capacity).
+
+Output format:
+max-flow

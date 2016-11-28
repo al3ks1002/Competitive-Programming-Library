@@ -2,3 +2,9 @@ You are given a string representing a mathematical expression having the followi
 0,1,..,9,+,-,*,/,(,)
 
 You need to evaluate the expression and print the result. All numbers are <= 10^9 (including intermediary numbers).
+
+Input format:
+string representing the expression
+
+Output format:
+the evaluation result

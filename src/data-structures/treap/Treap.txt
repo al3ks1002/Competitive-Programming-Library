@@ -10,3 +10,6 @@ For all x, |x| <= 10^9.
 Input format:
 M
 M lines representing the operations
+
+Output format:
+Lines representing the answers for queries of type K and C

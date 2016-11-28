@@ -1,21 +1,25 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <limits>
+#include <queue>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 template<class T>
 class BellmanFordGraph {
     public:
-        BellmanFordGraph(int num_vertices) : num_vertices_(num_vertices) {
+        explicit BellmanFordGraph(const int num_vertices) :
+            num_vertices_(num_vertices) {
             edges_.resize(num_vertices + 1);
         }
 
-        void AddEdge(int from, int to, T cost) {
+        void AddEdge(int const from, const int to, const T cost) {
             edges_[from].push_back({to, cost});
         }
 
         // Returns empty vector if the graph has a negative cycle.
-        vector<T> GetDistances(int source) {
+        vector<T> GetDistances(const int source) {
             vector<T> distance(num_vertices_ + 1, kMaxInf);
             vector<bool> in_queue(num_vertices_ + 1, false);
             vector<int> count(num_vertices_ + 1, 0);

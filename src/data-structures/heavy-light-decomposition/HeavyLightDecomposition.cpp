@@ -1,33 +1,37 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
+// Class that represents a segment tree that supports
+// update operation only on a value (not an interval).
 template<typename T>
 class SegmentTree {
     public:
-        SegmentTree(int size) : size_(size) {
+        explicit SegmentTree(const int size) : size_(size) {
             segment_.resize(4 * size + 5);
         }
 
         // The array must be indexed from 1
         template<typename Array>
-        SegmentTree(int size, Array& array) : size_(size) {
+        SegmentTree(const int size, const Array& array) : size_(size) {
             segment_.resize(4 * size + 5);
             Build(1, 1, size, array);
         }
 
-        void Update(int position, T value) {
+        void Update(const int position, const T value) {
             return Update(1, 1, size_, position, value);
         }
 
-        T Query(int left, int right) {
+        T Query(const int left, const int right) const {
             return Query(1, 1, size_, left, right);
         }
 
     private:
         template<typename Array>
-        void Build(int node, int left, int right, Array& v) {
+        void Build(const int node, const int left, const int right, const Array& v) {
             if (left == right) {
                 segment_[node] = v[left];
                 return;
@@ -43,7 +47,8 @@ class SegmentTree {
             segment_[node] = TreeFunction(segment_[left_son], segment_[right_son]);
         }
 
-        void Update(int node, int left, int right, int position, T value) {
+        void Update(const int node, const int left, const int right,
+                    const int position, const T value) {
             if (left == right) {
                 segment_[node] = value;
                 return;
@@ -62,7 +67,7 @@ class SegmentTree {
             segment_[node] = TreeFunction(segment_[left_son], segment_[right_son]);
         }
 
-        T Query(int node, int left, int right, int a, int b) {
+        T Query(const int node, const int left, const int right, const int a, const int b) const {
             if (left >= a && right <= b) {
                 return segment_[node];
             }
@@ -84,7 +89,7 @@ class SegmentTree {
             return TreeFunction(x, y);
         }
 
-        T TreeFunction(T x, T y) {
+        T TreeFunction(const T x, const T y) const {
             return (x > y) ? x : y;
         }
 
@@ -95,18 +100,21 @@ class SegmentTree {
 template<class T>
 class HLDTree {
     public:
-        // values is indexed from 1
-        HLDTree(int num_vertices, const vector<T>& values) :
-            num_vertices_(num_vertices), values_(values) {
-            root_ = 1;
+        // values vector must be indexed from 1.
+        HLDTree(const int num_vertices, const vector<T>& values, const int root) :
+            num_vertices_(num_vertices), values_(values), root_(root) {
             edges_.resize(num_vertices + 1);
         }
 
-        void AddEdge(int from, int to) {
+        HLDTree(const int num_vertices, const vector<T>& values) :
+            HLDTree(num_vertices, values, 1) {}
+
+        void AddEdge(const int from, const int to) {
             edges_[from].push_back(to);
             edges_[to].push_back(from);
         }
 
+        // Must be called first.
         void Prepare() {
             subtree_.resize(num_vertices_ + 1);
             level_.resize(num_vertices_ + 1);
@@ -121,7 +129,7 @@ class HLDTree {
                 reverse(path_[i].begin() + 1, path_[i].end());
 
                 aux.clear();
-                aux.push_back(-1); // dummy
+                aux.push_back(-1);  // dummy
                 for (int j = 1; j < (int)path_[i].size(); j++) {
                     aux.push_back(values_[path_[i][j]]);
                 }
@@ -133,12 +141,12 @@ class HLDTree {
             }
         }
 
-        void Update(int vertex, T value) {
+        void Update(const int vertex, const T value) {
             int position = where_[vertex];
             segment_tree_[chain_[vertex]].Update(position, value);
         }
 
-        T GetMax(int x, int y) {
+        T GetMax(int x, int y) const {
             T max_value = 0;
             while (1) {
                 if (chain_[x] == chain_[y]) {
@@ -160,8 +168,8 @@ class HLDTree {
         }
 
     private:
-        int root_;
-        int num_vertices_;
+        const int root_;
+        const int num_vertices_;
         vector<T> values_;
         vector<int> subtree_;
         vector<int> level_;
@@ -172,7 +180,7 @@ class HLDTree {
         vector<vector<int>> path_;
         vector<SegmentTree<T>> segment_tree_;
 
-        void DFS(int vertex, int father) {
+        void DFS(const int vertex, const int father) {
             subtree_[vertex] = 1;
 
             for (int son : edges_[vertex])
@@ -186,7 +194,7 @@ class HLDTree {
             if (edges_[vertex].size() == 1 && vertex != root_) {
                 chain_[vertex] = path_.size();
                 path_.push_back(vector<int>());
-                path_.back().push_back(-1); // dummy
+                path_.back().push_back(-1);  // dummy
                 path_.back().push_back(vertex);
                 where_[vertex] = 1;
                 return;

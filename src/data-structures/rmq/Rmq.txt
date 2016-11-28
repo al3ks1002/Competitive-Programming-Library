@@ -6,3 +6,6 @@ Input format:
 N M
 N lines representing the elements from the array
 M lines representing the queries
+
+Output format:
+M lines representing the answers for the queries

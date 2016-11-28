@@ -1,11 +1,13 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class ZAlgorithm {
     public:
-        ZAlgorithm(const string& text) : text_(text) {}
+        explicit ZAlgorithm(const string& text) : text_(text) {}
 
         vector<int> FindZ() {
             vector<int> z(text_.size(), 0);
@@ -48,7 +50,8 @@ class ZAlgorithm {
             return z;
         }
 
-        pair<int, vector<int>> GetMatchingIndexes(const string& pattern, int max_index_count) {
+        pair<int, vector<int>> GetMatchingIndexes(const string& pattern,
+        const int max_index_count) {
             text_ = pattern + '$' + text_;
 
             int count = 0;
@@ -69,7 +72,6 @@ class ZAlgorithm {
 
     private:
         string text_;
-
 };
 
 int main() {

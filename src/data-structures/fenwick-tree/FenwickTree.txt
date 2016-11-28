@@ -1,5 +1,5 @@
 You are given N (<=10^5) and M (<=2*10^5).
-An array of N numbers (<= 10^4) follows.
+An array of N numbers (with values <= 10^4) follows.
 Then M queries are given:
 0 a b - add value b to the a-th element in the array
 1 a b - get the sum from [a, b]

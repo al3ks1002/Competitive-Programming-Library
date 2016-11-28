@@ -8,3 +8,6 @@ Input format:
 N M Q
 N lines, each with M elements, representing the matrix
 Q lines representing the operations
+
+Output format:
+The answers for the queries of type 0

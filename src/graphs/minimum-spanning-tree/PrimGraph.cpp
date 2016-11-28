@@ -1,19 +1,24 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <functional>
+#include <iostream>
+#include <limits>
+#include <queue>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 template<class T>
 class PrimGraph {
     public:
-        PrimGraph(int num_vertices) : num_vertices_(num_vertices) {
+        explicit PrimGraph(const int num_vertices) : num_vertices_(num_vertices) {
             edges_.resize(num_vertices + 1);
             distance_.resize(num_vertices + 1, kMaxCost);
             father_.resize(num_vertices + 1, 0);
             visited_.resize(num_vertices + 1, false);
         }
 
-        void AddEdge(int from, int to, T cost) {
+        void AddEdge(const int from, const int to, const T cost) {
             edges_[from].push_back({to, cost});
             edges_[to].push_back({from, cost});
         }
@@ -42,15 +47,7 @@ class PrimGraph {
         }
 
     private:
-        const int kMaxCost = numeric_limits<T>::max();
-        int num_vertices_;
-        vector<vector<pair<int, T>>> edges_;
-        vector<T> distance_;
-        vector<int> father_;
-        vector<bool> visited_;
-        priority_queue<pair<int, T>, vector<pair<int, T>>, greater<pair<int, T>>> queue;
-
-        void ExtendVertex(int vertex) {
+        void ExtendVertex(const int vertex) {
             visited_[vertex] = true;
             for (auto& edge : edges_[vertex]) {
                 int neighbour = edge.first;
@@ -63,6 +60,14 @@ class PrimGraph {
                 }
             }
         }
+
+        const int kMaxCost = numeric_limits<T>::max();
+        const int num_vertices_;
+        vector<vector<pair<int, T>>> edges_;
+        vector<T> distance_;
+        vector<int> father_;
+        vector<bool> visited_;
+        priority_queue<pair<int, T>, vector<pair<int, T>>, greater<pair<int, T>>> queue;
 };
 
 int main() {

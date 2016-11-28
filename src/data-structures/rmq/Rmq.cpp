@@ -1,19 +1,16 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
-template<typename T>
+template<class T>
 class Rmq {
     public:
         Rmq() {}
 
         template<typename Array>
-        Rmq(int size, const Array& array) : Rmq(size, array, vector<int>()) {}
-
-        template<typename Array>
-        Rmq(int size, const Array& array, const vector<int>& key) : size_(size), key_(key) {
-            lg_max_ = GetLog(size);
+        Rmq(const int size, const Array& array, const vector<int>& key) :
+            size_(size), lg_max_(GetLog(size)), key_(key) {
             rmq_.resize(lg_max_);
             for (int i = 0; i < (int)rmq_.size(); i++) {
                 rmq_[i].resize(size_);
@@ -22,19 +19,16 @@ class Rmq {
             Build(array);
         }
 
-        T Get(int x, int y) {
+        template<typename Array>
+        Rmq(const int size, const Array& array) : Rmq(size, array, vector<int>()) {}
+
+        T Get(const int x, const int y) const {
             int lg = lg_[y - x + 1];
             return GetMin(rmq_[lg][x], rmq_[lg][y - (1 << lg) + 1]);
         }
 
     private:
-        int size_;
-        int lg_max_;
-        vector<int> lg_;
-        vector<vector<T>> rmq_;
-        vector<int> key_;
-
-        int GetLog(int size) {
+        int GetLog(int size) const {
             int lg = 1;
             while (size) {
                 lg++;
@@ -52,7 +46,7 @@ class Rmq {
         }
 
         template<typename Array>
-        void Build(Array & array) {
+        void Build(const Array& array) {
             for (int i = 0; i < size_; i++) {
                 rmq_[0][i] = array[i];
             }
@@ -62,25 +56,28 @@ class Rmq {
                 }
         }
 
-        int GetMin(int x, int y) {
+        int GetMin(const int x, const int y) const {
             if (Key(x) < Key(y)) {
                 return x;
             }
             return y;
         }
 
-        // If you want the RMQ to be compared with a different key, modify this
-        int Key(int x) {
+        int Key(const int x) const {
             if (key_.empty()) {
                 return x;
             }
             return key_[x];
         }
+
+        const int size_;
+        const int lg_max_;
+        vector<int> lg_;
+        vector<vector<T>> rmq_;
+        vector<int> key_;
 };
 
 int main() {
-    cin.sync_with_stdio(false);
-
     int n, m;
     scanf("%d%d", &n, &m);
 

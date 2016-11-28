@@ -5,3 +5,6 @@ Find the min cost max flow.
 Input format:
 N M S D
 M lines representing edges (x y capacity cost)
+
+Output format:
+mincost maxflow

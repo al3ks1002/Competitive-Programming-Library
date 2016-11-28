@@ -1,17 +1,17 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 template<class T>
 class Set {
     public:
-        Set(const vector<T>& set) : set_(set) {
-            num_numbers_ = set.size();
-            log_ = FindLog(set);
-        }
+        explicit Set(const vector<T>& set) : set_(set), num_numbers_(set.size()),
+            log_(FindLog(set)) {}
 
-        int FindLog(const vector<T>& set) {
+        int FindLog(const vector<T>& set) const {
             int log = 1;
 
             for (T x : set) {
@@ -50,9 +50,9 @@ class Set {
         }
 
     private:
-        int num_numbers_;
-        int log_;
-        vector<T> set_;
+        const int num_numbers_;
+        const int log_;
+        const vector<T> set_;
         vector<T> basis_;
 
         void FindXorBasis() {

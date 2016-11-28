@@ -1,11 +1,15 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <cmath>
+#include <iomanip>
+#include <iostream>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class Gauss {
     public:
-        Gauss(int num_equations, int num_unknowns, const vector<vector<double>>& system) :
+        Gauss(const int num_equations, const int num_unknowns,
+              const vector<vector<double>>& system) :
             num_equations_(num_equations), num_unknowns_(num_unknowns), system_(system) {}
 
         vector<double> SolveSystem() {
@@ -14,11 +18,6 @@ class Gauss {
         }
 
     private:
-        const double kEps = 1e-10;
-        int num_equations_;
-        int num_unknowns_;
-        vector<vector<double>> system_;
-
         void TransformToRowEchelonForm() {
             int i = 0;
             int j = 0;
@@ -89,9 +88,14 @@ class Gauss {
             return unknowns;
         }
 
-        bool NotZero(double x) {
+        bool NotZero(const double x) const  {
             return fabs(x) >= kEps;
         }
+
+        const double kEps = 1e-10;
+        const int num_equations_;
+        const int num_unknowns_;
+        vector<vector<double>> system_;
 };
 
 int main() {
@@ -113,7 +117,7 @@ int main() {
         cout << "Imposibil\n";
     } else {
         for (auto it : ans) {
-            cout << fixed << setprecision(10) << it<< " ";
+            cout << fixed << setprecision(10) << it << " ";
         }
     }
 

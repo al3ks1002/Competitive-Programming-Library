@@ -8,3 +8,6 @@ All elements are 32bit integers.
 Input format:
 M
 M lines representing the operations
+
+Output format:
+Answers for the operations of type 3.

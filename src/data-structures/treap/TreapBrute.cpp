@@ -1,21 +1,9 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <set>
 
 using namespace std;
 
-#define ll long long
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define pdd pair<ld, ld>
-#define all(x) (x).begin(), (x).end()
-#define fi first
-#define se second
-
 int main() {
-    cin.sync_with_stdio(false);
-
     int q;
     set<int> s;
     scanf("%d\n", &q);

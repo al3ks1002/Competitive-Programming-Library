@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -7,14 +9,14 @@ using namespace std;
 // articulation points).
 class BCCGraph {
     public:
-        BCCGraph(int num_vertices) : num_vertices_(num_vertices) {
+        explicit BCCGraph(const int num_vertices) : num_vertices_(num_vertices) {
             discovery_time_.resize(num_vertices + 1);
             low_link_.resize(num_vertices + 1);
             edges_.resize(num_vertices + 1);
             is_articulation_point_.resize(num_vertices + 1);
         }
 
-        void AddEdge(int from, int to) {
+        void AddEdge(const int from, const int to) {
             edges_[from].push_back(to);
             edges_[to].push_back(from);
         }
@@ -26,26 +28,26 @@ class BCCGraph {
             fill(is_articulation_point_.begin(), is_articulation_point_.end(), 0);
             biconnected_components_.clear();
             stack_.clear();
-            Dfs(1, 0);
+            DFS(1, 0);
         }
 
         vector<vector<int>> GetBiconnectedComponents() {
             return biconnected_components_;
         }
 
-        bool IsArticulationPoint(int node) const {
+        bool IsArticulationPoint(const int node) const {
             return is_articulation_point_[node];
         }
 
     private:
-        void Dfs(int node, int father) {
+        void DFS(const int node, const int father) {
             discovery_time_[node] = low_link_[node] = ++current_count_;
             stack_.push_back(node);
 
             for (auto neighbour : edges_[node]) {
                 if (neighbour != father) {
                     if (!discovery_time_[neighbour]) {
-                        Dfs(neighbour, node);
+                        DFS(neighbour, node);
                         low_link_[node] = min(low_link_[node], low_link_[neighbour]);
 
                         // The current node is an articulation point
@@ -59,7 +61,7 @@ class BCCGraph {
             }
         }
 
-        void FetchComponent(int node, int son) {
+        void FetchComponent(const int node, const int son) {
             is_articulation_point_[node] = 1;
             vector<int> new_component;
             while (stack_.back() != son) {

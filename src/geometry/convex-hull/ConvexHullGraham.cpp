@@ -1,32 +1,14 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iomanip>
+#include <iostream>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class ConvexHullGraham {
     public:
-        struct Point {
-            double x_;
-            double y_;
-
-            Point() : x_(0.0), y_(0.0) {};
-
-            Point(double x_, double y_) : x_(x_), y_(y_) {};
-
-            Point& operator =(const Point& other) {
-                this->x_ = other.x_;
-                this->y_ = other.y_;
-                return *this;
-            }
-
-            Point& operator =(const pair<double, double>& other) {
-                this->x_ = other.first;
-                this->y_ = other.second;
-                return *this;
-            }
-        };
-
-        ConvexHullGraham(const vector<pair<double, double>>& input_points) {
+        explicit ConvexHullGraham(const vector<pair<double, double>>& input_points) {
             int sentinel_index = 0;
             pair<double, double> sentinel = input_points[0];
 
@@ -68,22 +50,44 @@ class ConvexHullGraham {
 
 
     private:
-        vector<Point> points_;
-        Point sentinel_;
+        struct Point {
+            double x_;
+            double y_;
 
-        static double CrossProduct(const Point& a, const Point& b, const Point& c) {
-            return (b.x_ - a.x_) * (c.y_ - a.y_) - (c.x_ - a.x_) * (b.y_ - a.y_);
-        }
+            Point() : x_(0.0), y_(0.0) {}
+
+            Point(double x, double y) : x_(x), y_(y) {}
+
+            Point& operator =(const Point& other) {
+                this->x_ = other.x_;
+                this->y_ = other.y_;
+                return *this;
+            }
+
+            Point& operator =(const pair<double, double>& other) {
+                this->x_ = other.first;
+                this->y_ = other.second;
+                return *this;
+            }
+        };
 
         struct PolarComparator {
             ConvexHullGraham* parent_class_;
 
-            PolarComparator(ConvexHullGraham* parent_class) : parent_class_(parent_class) {}
+            explicit PolarComparator(ConvexHullGraham* parent_class) :
+                parent_class_(parent_class) {}
 
             bool operator() (const Point& a, const Point& b) const {
                 return CrossProduct(parent_class_->sentinel_, a, b) > 0;
             }
         };
+
+        static double CrossProduct(const Point& a, const Point& b, const Point& c) {
+            return (b.x_ - a.x_) * (c.y_ - a.y_) - (c.x_ - a.x_) * (b.y_ - a.y_);
+        }
+
+        vector<Point> points_;
+        Point sentinel_;
 };
 
 int main() {

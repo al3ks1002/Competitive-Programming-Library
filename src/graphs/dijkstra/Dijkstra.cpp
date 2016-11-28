@@ -1,20 +1,24 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <functional>
+#include <limits>
+#include <queue>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 template<class T>
 class DijkstraGraph {
     public:
-        DijkstraGraph(int num_vertices) : num_vertices_(num_vertices) {
+        explicit DijkstraGraph(int num_vertices) : num_vertices_(num_vertices) {
             edges_.resize(num_vertices + 1);
         }
 
-        void AddEdge(int from, int to, T cost) {
+        void AddEdge(const int from, const int to, const T cost) {
             edges_[from].push_back({to, cost});
         }
 
-        vector<T> GetDistances(int source) {
+        vector<T> GetDistances(const int source) {
             vector<T> distance(num_vertices_ + 1, kMaxInf);
             vector<bool> visited(num_vertices_ + 1, 0);
             priority_queue<pair<T, int>, vector<pair<T, int>>, greater<pair<T, int>>> queue;

@@ -1,23 +1,13 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
 
 using namespace std;
-
-#define ll long long
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define pdd pair<ld, ld>
-#define all(x) (x).begin(), (x).end()
-#define fi first
-#define se second
 
 template<class T>
 class ExpressionEvaluation {
     public:
-        ExpressionEvaluation(const string& expression) : expression_(expression) {}
+        explicit ExpressionEvaluation(const string& expression) :
+            expression_(expression) {}
 
         T Evaluate() {
             pointer_ = expression_.begin();
@@ -25,9 +15,6 @@ class ExpressionEvaluation {
         }
 
     private:
-        string expression_;
-        string::iterator pointer_;
-
         T EvaluateExpression() {
             T result = EvaluateTerm();
 
@@ -77,6 +64,9 @@ class ExpressionEvaluation {
 
             return result;
         }
+
+        string expression_;
+        string::iterator pointer_;
 };
 
 int main() {

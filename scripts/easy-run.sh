@@ -10,6 +10,7 @@
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 ORANGE='\033[0;33m'
+PURPLE='\033[0;35m'
 
 # Function needed to show the usage.
 usage() {
@@ -41,7 +42,7 @@ run_program() {
     # Gets the source file.
     source_file=$2
 
-    printf "${GREEN}Running: [$user_index] $source_file\n"
+    printf "${PURPLE}Running: [$user_index] $source_file\n"
 
     # Gets the path.
     path=$(echo $source_file | rev | cut --complement -d / -f 1 | rev)
@@ -94,7 +95,7 @@ main() {
     index=0
 
     # Gets all the source files.
-    for file in $(find ../src -name "*.cpp"); do
+    for file in $(find ../src -name "*.cpp" | sort); do
         if (( $menu != 0 )); then
             printf "${ORANGE}[$index] $file\n"
         fi
@@ -114,7 +115,7 @@ main() {
 
     # Finds the source file matches with the user index and runs it in "run_program" function.
     index=0
-    for file in $(find ../src -name "*.cpp"); do
+    for file in $(find ../src -name "*.cpp" | sort); do
         if ((index == user_index)); then
             run_program $user_index $file
             break

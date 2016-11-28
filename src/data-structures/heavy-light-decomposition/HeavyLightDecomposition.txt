@@ -7,3 +7,6 @@ Input format:
 N M
 a line containing N values representing the vertices values
 M lines representing the operations
+
+Output format:
+Lines representing the answers for the queries of type 1

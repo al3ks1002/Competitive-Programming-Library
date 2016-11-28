@@ -6,4 +6,4 @@ N
 a1 a2 ... aN
 
 Output format:
-answer
+Size of the LIS

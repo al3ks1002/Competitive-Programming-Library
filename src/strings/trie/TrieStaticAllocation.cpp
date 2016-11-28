@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -6,9 +8,8 @@ using namespace std;
 // You have to change kMaxSons when you use this class.
 class Trie {
     public:
-        Trie(int alphabet_start) : alphabet_start_(alphabet_start) {
-            root_ = new Node();
-        }
+        explicit Trie(const int alphabet_start) :
+            alphabet_start_(alphabet_start), root_(new Node()) {}
 
         void AddWord(const string& word) {
             Node* current = root_;
@@ -81,11 +82,11 @@ class Trie {
         }
 
         ~Trie() {
-            Clear();
-            delete root_;
+            /* Clear(); */
+            /* delete root_; */
         }
 
-        const static int kMaxSons = 26;
+        static const int kMaxSons = 26;
 
     private:
         struct Node {
@@ -106,7 +107,7 @@ class Trie {
             }
         };
 
-        void Dfs(Node* node, Node* father, int letter_from_father) {
+        void Dfs(Node* node, Node* father, const int letter_from_father) {
             int current_letter = 0;
             for (int i = 0; i < kMaxSons; i++) {
                 Node* son = node->sons_[i];

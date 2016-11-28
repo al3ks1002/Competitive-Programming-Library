@@ -6,3 +6,6 @@ Q (<= 10^5) operations are being performed:
 Input format:
 N Q
 Q lines representing the operations
+
+Output format:
+Lines with answers for the queries of type 1

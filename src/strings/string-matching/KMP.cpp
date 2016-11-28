@@ -1,13 +1,16 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class KMP {
     public:
-        KMP(const string& text) : text_(text) {}
+        explicit KMP(const string& text) : text_(text) {}
 
-        pair<int, vector<int>> GetMatchingIndexes(const string& pattern, int max_index_count) {
+        pair<int, vector<int>> GetMatchingIndexes(const string& pattern,
+            const int max_index_count) {
             int count = 0;
             vector<int> indexes;
             indexes.reserve(max_index_count);
@@ -36,8 +39,6 @@ class KMP {
         }
 
     private:
-        string text_;
-
         void BuildPi(const string& pattern, vector<int>& prefix) {
             int q = 0;
             for (int i = 1; i < (int)pattern.size(); i++) {
@@ -52,6 +53,8 @@ class KMP {
                 prefix[i] = q;
             }
         }
+
+        const string text_;
 };
 
 int main() {

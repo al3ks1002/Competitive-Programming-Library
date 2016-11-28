@@ -1,9 +1,11 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <utility>
 
 using namespace std;
 
-// Class that represents a hash set.
 template<class T>
 class HashSet {
     public:
@@ -13,7 +15,7 @@ class HashSet {
             hash_.resize(mod_);
         }
 
-        bool Insert(const T& value) {
+        bool Insert(const T value) {
             int bucket = value % mod_;
             for (T current_value : hash_[bucket]) {
                 if (current_value == value) {
@@ -24,7 +26,7 @@ class HashSet {
             return true;
         }
 
-        bool Remove(T value) {
+        bool Remove(const T value) {
             int bucket = value % mod_;
             for (T& current_value : hash_[bucket]) {
                 if (current_value == value) {
@@ -36,7 +38,7 @@ class HashSet {
             return false;
         }
 
-        bool Find(T value) {
+        bool Find(const T value) const {
             int bucket = value % mod_;
             for (T current_value : hash_[bucket]) {
                 if (current_value == value) {
@@ -50,7 +52,6 @@ class HashSet {
         const int kHashPrimes[3] = {98317, 196613, 393241};
         int mod_;
         vector<vector<T>> hash_;
-
 };
 
 int main() {

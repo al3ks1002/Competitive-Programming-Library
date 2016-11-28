@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <vector>
 
 using namespace std;
 
@@ -8,29 +8,29 @@ using namespace std;
 template<typename T>
 class LazySegmentTree {
     public:
-        LazySegmentTree(int size) : size_(size) {
+        explicit LazySegmentTree(const int size) : size_(size) {
             segment_.resize(4 * size + 5);
             lazy_.resize(4 * size + 5);
         }
 
         template<typename Array>
-        LazySegmentTree(int size, Array& array) : size_(size) {
+        LazySegmentTree(const int size, const Array& array) : size_(size) {
             segment_.resize(4 * size + 5);
             lazy_.resize(4 * size + 5);
             Build(1, 1, size, array);
         }
 
-        void Update(int update_left, int update_right, T value) {
+        void Update(const int update_left, const int update_right, const T value) {
             return Update(1, 1, size_, update_left, update_right, value);
         }
 
-        T Query(int left, int right) {
+        T Query(const int left, const int right) {
             return Query(1, 1, size_, left, right);
         }
 
     private:
         template<typename Array>
-        void Build(int node, int left, int right, Array& v) {
+        void Build(const int node, const int left, const int right, const Array& v) {
             if (left == right) {
                 segment_[node] = v[left];
                 return;
@@ -46,7 +46,8 @@ class LazySegmentTree {
             segment_[node] = segment_[left_son] + segment_[right_son];
         }
 
-        void Update(int node, int left, int right, int update_left, int update_right, T value) {
+        void Update(const int node, const int left, const int right,
+                    const int update_left, const int update_right, const T value) {
             int middle = (left + right) / 2;
             int left_son = 2 * node;
             int right_son = 2 * node + 1;
@@ -71,7 +72,9 @@ class LazySegmentTree {
             segment_[node] = segment_[left_son] + segment_[right_son];
         }
 
-        T Query(int node, int left, int right, int update_left, int update_right) {
+        T Query(const int node, const int left, const int right,
+                const int update_left,
+                const int update_right) {
             int middle = (left + right) / 2;
             int left_son = 2 * node;
             int right_son = 2 * node + 1;
@@ -90,7 +93,7 @@ class LazySegmentTree {
                    + Query(right_son, middle + 1, right, update_left, update_right);
         }
 
-        void Propagate(int node, int left, int right) {
+        void Propagate(const int node, const int left, const int right) {
             if (lazy_[node]) {
                 segment_[node] += lazy_[node] * (right - left + 1);
                 if (left < right) {

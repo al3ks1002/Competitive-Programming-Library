@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <stdio.h>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -6,14 +8,14 @@ using namespace std;
 // you can find the biconnected components (separated by bridges).
 class BCCBridgeGraph {
     public:
-        BCCBridgeGraph(int num_vertices) : num_vertices_(num_vertices) {
+        explicit BCCBridgeGraph(const int num_vertices) : num_vertices_(num_vertices) {
             discovery_time_.resize(num_vertices + 1);
             low_link_.resize(num_vertices + 1);
             edges_.resize(num_vertices + 1);
             what_component_.resize(num_vertices + 1);
         }
 
-        void AddEdge(int from, int to) {
+        void AddEdge(const int from, const int to) {
             edges_[from].push_back(to);
             edges_[to].push_back(from);
         }
@@ -25,26 +27,26 @@ class BCCBridgeGraph {
             fill(what_component_.begin(), what_component_.end(), 0);
             biconnected_components_.clear();
             stack_.clear();
-            Dfs(1, 0);
+            DFS(1, 0);
         }
 
         vector<vector<int>> GetBiconnectedComponents() const {
             return biconnected_components_;
         }
 
-        int GetComponent(int node) const {
+        int GetComponent(const int node) const {
             return what_component_[node];
         }
 
     private:
-        void Dfs(int node, int father) {
+        void DFS(const int node, const int father) {
             discovery_time_[node] = low_link_[node] = ++current_count_;
             stack_.push_back(node);
 
             for (auto neighbour : edges_[node]) {
                 if (neighbour != father) {
                     if (!discovery_time_[neighbour]) {
-                        Dfs(neighbour, node);
+                        DFS(neighbour, node);
                         low_link_[node] = min(low_link_[node], low_link_[neighbour]);
                     } else {
                         low_link_[node] = min(low_link_[node], discovery_time_[neighbour]);
@@ -58,7 +60,7 @@ class BCCBridgeGraph {
             }
         }
 
-        void FetchComponent(int node) {
+        void FetchComponent(const int node) {
             vector<int> new_component;
             int components_size = (int)biconnected_components_.size() + 1;
             while (stack_.back() != node) {

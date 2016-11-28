@@ -1,9 +1,9 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <cstring>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-// Class that represents a fast reader.
 class FastReader {
     public:
         FastReader() {
@@ -22,7 +22,7 @@ class FastReader {
             }
         }
 
-        void ReadInt64(int64_t &number) {
+        void ReadLongLong(long long &number) {
             number = 0;
             while (!IsDigit(buffer_[position_])) {
                 AdvancePointer();
@@ -41,7 +41,7 @@ class FastReader {
             }
         }
 
-        bool IsDigit(char c) {
+        bool IsDigit(const char c) const {
             return c >= '0' && c <= '9';
         }
 

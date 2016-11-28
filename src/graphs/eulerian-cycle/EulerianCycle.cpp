@@ -1,16 +1,19 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <iostream>
+#include <stack>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class EulerianGraph {
     public:
-        EulerianGraph(int num_vertices) : num_vertices_(num_vertices), edge_index_(0) {
+        explicit EulerianGraph(const int num_vertices) :
+            num_vertices_(num_vertices), edge_index_(0) {
             visited_.resize(num_vertices_ + 1, false);
             edges_.resize(num_vertices_ + 1);
         }
 
-        void AddEdge(int from, int to) {
+        void AddEdge(const int from, const int to) {
             edges_[from].emplace_back(to, edge_index_);
             edges_[to].emplace_back(from, edge_index_);
             edge_index_++;
@@ -49,11 +52,6 @@ class EulerianGraph {
         }
 
     private:
-        int num_vertices_;
-        int edge_index_;
-        vector<bool> visited_;
-        vector<vector<pair<int, int>>> edges_;
-
         bool IsConnected() {
             DFS(1);
             for (int i = 1; i <= num_vertices_; i++) {
@@ -64,7 +62,7 @@ class EulerianGraph {
             return 1;
         }
 
-        bool IsEulerian() {
+        bool IsEulerian() const {
             for (int i = 1; i <= num_vertices_; i++) {
                 if (edges_[i].size() & 1) {
                     return 0;
@@ -73,7 +71,7 @@ class EulerianGraph {
             return 1;
         }
 
-        void DFS(int vertex) {
+        void DFS(const int vertex) {
             visited_[vertex] = 1;
             for (auto neighbour : edges_[vertex]) {
                 if (!visited_[neighbour.first]) {
@@ -81,6 +79,11 @@ class EulerianGraph {
                 }
             }
         }
+
+        const int num_vertices_;
+        int edge_index_;
+        vector<bool> visited_;
+        vector<vector<pair<int, int>>> edges_;
 };
 
 int main() {

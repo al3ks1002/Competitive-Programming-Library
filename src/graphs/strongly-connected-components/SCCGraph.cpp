@@ -1,18 +1,20 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class SCCGraph {
     public:
-        SCCGraph(int num_vertices) : num_vertices_(num_vertices) {
+        explicit SCCGraph(const int num_vertices) : num_vertices_(num_vertices) {
             edges_.resize(num_vertices + 1);
             transpose_edges_.resize(num_vertices + 1);
             visited_.resize(num_vertices + 1, false);
             what_component_.resize(num_vertices + 1, false);
         }
 
-        void AddEdge(int from, int to) {
+        void AddEdge(const int from, const int to) {
             edges_[from].push_back(to);
             transpose_edges_[to].push_back(from);
         }
@@ -40,14 +42,7 @@ class SCCGraph {
         }
 
     private:
-        int num_vertices_;
-        vector<vector<int>> edges_;
-        vector<vector<int>> transpose_edges_;
-        vector<bool> visited_;
-        vector<int> topological_sorting_;
-        vector<int> what_component_;
-
-        void DFS(int vertex) {
+        void DFS(const int vertex) {
             visited_[vertex] = true;
 
             for (auto neighbour : edges_[vertex]) {
@@ -59,7 +54,7 @@ class SCCGraph {
             topological_sorting_.push_back(vertex);
         }
 
-        void DFST(int vertex, int current_component) {
+        void DFST(const int vertex, const int current_component) {
             visited_[vertex] = true;
             what_component_[vertex] = current_component;
 
@@ -69,6 +64,13 @@ class SCCGraph {
                 }
             }
         }
+
+        const int num_vertices_;
+        vector<vector<int>> edges_;
+        vector<vector<int>> transpose_edges_;
+        vector<bool> visited_;
+        vector<int> topological_sorting_;
+        vector<int> what_component_;
 };
 
 int main() {

@@ -1,15 +1,17 @@
-#include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <deque>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
 class AhoCorasickAutomaton {
     public:
-        AhoCorasickAutomaton(int alphabet_start) : alphabet_start_(alphabet_start), num_words_(0) {
-            root_ = new Node();
-        }
+        explicit AhoCorasickAutomaton(const int alphabet_start) : alphabet_start_
+            (alphabet_start), root_(new Node()), num_words_(0) {}
 
-        void InsertWord(const string& word, int index) {
+        void InsertWord(const string& word, const int index) {
             num_words_ = max(num_words_, index + 1);
             Node* current = root_;
             for (int letter : word) {
@@ -32,7 +34,7 @@ class AhoCorasickAutomaton {
         }
 
     private:
-        const static int kMaxSons = 26;
+        static const int kMaxSons = 26;
 
         struct Node {
             vector<int> indexes_;
@@ -115,8 +117,8 @@ class AhoCorasickAutomaton {
             }
         }
 
+        const int alphabet_start_;
         Node* root_;
-        int alphabet_start_;
         int num_words_;
         deque<Node*> queue_;
 };

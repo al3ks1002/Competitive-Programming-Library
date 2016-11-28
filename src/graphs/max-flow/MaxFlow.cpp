@@ -1,5 +1,8 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <limits>
+#include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -10,17 +13,17 @@ using namespace std;
 template<class F>
 class MaxFlowGraph {
     public:
-        MaxFlowGraph(int num_vertices) : num_vertices_(num_vertices + 1) {
-            previous_vertex_.resize(num_vertices_);
+        explicit MaxFlowGraph(const int num_vertices) : num_vertices_(num_vertices) {
+            previous_vertex_.resize(num_vertices_ + 1);
         }
 
-        void AddEdge(int from, int to, F capacity) {
+        void AddEdge(const int from, const int to, const F capacity) {
             neighbours_[from].push_back(to);
             capacity_[from][to] += capacity;
             neighbours_[to].push_back(from);
         }
 
-        F GetMaxFlow(int source, int sink) {
+        F GetMaxFlow(const int source, const int sink) {
             F max_flow = 0;
             while (PushFlow(source, sink)) {
                 for (int vertex : neighbours_[sink]) {
@@ -51,12 +54,12 @@ class MaxFlowGraph {
             return max_flow;
         }
 
-        F GetFlow(int from, int to) const {
+        F GetFlow(const int from, const int to) const {
             return flow_[from][to];
         }
 
     private:
-        bool PushFlow(int source, int sink) {
+        bool PushFlow(const int source, const int sink) {
             fill(previous_vertex_.begin(), previous_vertex_.end(), -1);
             queue<int> q;
 
@@ -86,7 +89,7 @@ class MaxFlowGraph {
         }
 
         static const int kMax = 1005;
-        int num_vertices_;
+        const int num_vertices_;
         vector<int> neighbours_[kMax];
         F capacity_[kMax][kMax];
         F flow_[kMax][kMax];

@@ -1,13 +1,19 @@
 You have a null sequence. The sequence is 1 based.
 
 M operations are being performed:
-I k e - insert e at index k. Elements that were on indexes >= k are being shifted one position to the right; (1 <= k <= sequence_size + 1; e <= 10^9);
-A k - print the element from index k;
-R i j - reverse subsequence [i, j] (i <= j);
-D i j - delete subsequence [i, j] (i <= j).
+- I k e - insert e at index k;
+  Elements that were on indexes >= k are being shifted one position to the right;
+  1 <= k <= sequence_size + 1; e <= 10^9;
+- A k - print the element from index k;
+- R i j - reverse subsequence [i, j] (i <= j);
+ -D i j - delete subsequence [i, j] (i <= j).
 
 At the end you need to print the sequence.
 
 Input format:
 M
 M lines representing the operations
+
+Output format:
+Lines representing the answers for queries of type A
+A line representing the sequence at the end

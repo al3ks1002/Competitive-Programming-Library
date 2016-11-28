@@ -1,11 +1,14 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class DisjointSet {
     public:
-        DisjointSet(int size) : size_(size + 1) {
+        explicit DisjointSet(const int size) : size_(size + 1) {
             father_.resize(size_);
             rank_.resize(size_);
             for (int i = 0; i < size_; i++) {
@@ -14,7 +17,7 @@ class DisjointSet {
             }
         }
 
-        int Find(int x) {
+        int Find(const int x) {
             if (father_[x] != x) {
                 father_[x] = Find(father_[x]);
             }
@@ -22,7 +25,7 @@ class DisjointSet {
         }
 
         // x and y must be roots
-        void Unite(int x, int y) {
+        void Unite(const int x, const int y) {
             if (rank_[x] < rank_[y]) {
                 father_[x] = y;
             } else {
@@ -34,7 +37,7 @@ class DisjointSet {
         }
 
     private:
-        int size_;
+        const int size_;
         vector<int> father_;
         vector<int> rank_;
 };
@@ -42,21 +45,9 @@ class DisjointSet {
 template<class T>
 class KruskalGraph {
     public:
-        struct Edge {
-            int from_;
-            int to_;
-            T cost_;
+        explicit KruskalGraph(const int num_vertices) : num_vertices_(num_vertices) {}
 
-            Edge(int from , int to, T cost) : from_(from), to_(to), cost_(cost) {}
-
-            bool operator < (const Edge &other) const {
-                return cost_ < other.cost_;
-            }
-        };
-
-        KruskalGraph(int num_vertices) : num_vertices_(num_vertices) {}
-
-        void AddEdge(int from, int to, T cost) {
+        void AddEdge(const int from, const int to, const T cost) {
             edges_.emplace_back(from, to, cost);
         }
 
@@ -82,7 +73,19 @@ class KruskalGraph {
         }
 
     private:
-        int num_vertices_;
+        struct Edge {
+            int from_;
+            int to_;
+            T cost_;
+
+            Edge(int from , int to, T cost) : from_(from), to_(to), cost_(cost) {}
+
+            bool operator < (const Edge &other) const {
+                return cost_ < other.cost_;
+            }
+        };
+
+        const int num_vertices_;
         vector<Edge> edges_;
 };
 

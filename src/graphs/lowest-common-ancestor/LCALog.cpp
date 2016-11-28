@@ -1,11 +1,12 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
 class LCATree {
     public:
-        LCATree(int num_vertices, int root, const vector<int>& father) :
+        LCATree(const int num_vertices, const int root, const vector<int>& father) :
             num_vertices_(num_vertices),
             root_(root) {
             sons_.resize(num_vertices_ + 1);
@@ -22,7 +23,7 @@ class LCATree {
             Precalculate();
         }
 
-        void AddEdge(int father, int son) {
+        void AddEdge(const int father, const int son) {
             sons_[father].push_back(son);
             father_[0][son] = father;
             level_[son] = level_[father] + 1;
@@ -31,7 +32,7 @@ class LCATree {
             }
         }
 
-        int GetLCA(int x, int y) {
+        int GetLCA(int x, int y) const {
             if (level_[x] > level_[y]) {
                 swap(x, y);
             }
@@ -58,20 +59,14 @@ class LCATree {
         }
 
     private:
-        int num_vertices_;
-        int root_;
-        vector<vector<int>> sons_;
-        vector<vector<int>> father_;
-        vector<int> level_;
-
-        void DFS(int vertex) {
+        void DFS(const int vertex) {
             for (auto son : sons_[vertex]) {
                 level_[son] = level_[vertex] + 1;
                 DFS(son);
             }
         }
 
-        int GetLog(int x) {
+        int GetLog(const int x) const {
             int log = 0;
             while ((1 << log) <= x) {
                 log++;
@@ -89,11 +84,15 @@ class LCATree {
             level_.resize(num_vertices_ + 1, 0);
             DFS(root_);
         }
+
+        const int num_vertices_;
+        const int root_;
+        vector<vector<int>> sons_;
+        vector<vector<int>> father_;
+        vector<int> level_;
 };
 
 int main() {
-    cin.sync_with_stdio(false);
-
     int n, m;
     scanf("%d%d", &n, &m);
 

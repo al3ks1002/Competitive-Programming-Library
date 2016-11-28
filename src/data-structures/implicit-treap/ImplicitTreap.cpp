@@ -1,40 +1,32 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <cstdlib>
+#include <ctime>
+#include <utility>
 
 using namespace std;
 
-// Class that represents an implicit treap.
 template<class T>
 class ImplicitTreap {
     public:
-        /**
-         * Default constructor for ImplicitTreap.
-         */
         ImplicitTreap() {
             srand(time(0));
             root_ = nullptr;
         }
 
-        /**
-         * Finds the value from a given index.
-         */
-        T GetValueFromIndex(T index) {
+        // Finds the value from a given index.
+        T GetValueFromIndex(const T index) {
             return FindValueFromIndex(root_, index);
         }
 
-        /**
-         * Insers a value at a given index.
-         */
-        void InsertValueAtIndex(int index, T value) {
+        // Insers a value at a given index.
+        void InsertValueAtIndex(const int index, const T value) {
             pair<Node*, Node*> roots = Split(root_, index - 1);
             root_ = Merge(Merge(roots.first, new Node(value)), roots.second);
         }
 
-        /**
-        * Deletes the interval [left_index, right_index].
-        * Preconditions: 1 <= left_index <= right_index <= treap.Size().
-        */
-        void DeleteInterval(int left_index, int right_index) {
+        // Deletes the interval [left_index, right_index].
+        // Preconditions: 1 <= left_index <= right_index <= treap.Size().
+        void DeleteInterval(const int left_index, const int right_index) {
             pair<Node*, Node*> left_interval = Split(root_, left_index - 1);
             pair<Node*, Node*> middle_interval =
                 Split(left_interval.second, right_index - left_index + 1);
@@ -42,11 +34,9 @@ class ImplicitTreap {
             root_ = Merge(left_interval.first, middle_interval.second);
         }
 
-        /**
-         * Reverses the interval [left_index, right_index].
-         * Preconditions: 1 <= left_index <= right_index <= treap.Size().
-         */
-        void ReverseInterval(int left_index, int right_index) {
+        // Reverses the interval [left_index, right_index].
+        // Preconditions: 1 <= left_index <= right_index <= treap.Size().
+        void ReverseInterval(const int left_index, const int right_index) {
             pair<Node*, Node*> left_interval = Split(root_, left_index - 1);
             pair<Node*, Node*> middle_interval =
                 Split(left_interval.second, right_index - left_index + 1);
@@ -55,17 +45,11 @@ class ImplicitTreap {
                           middle_interval.second);
         }
 
-        /**
-         * Returns the size of the treap.
-         */
         int Size() const {
             return GetSubtreeSize(root_);
         }
 
-        /**
-         * Prints the treap.
-         */
-        void Print()  {
+        void Print() {
             PrintTreap(root_);
         }
 
@@ -78,11 +62,12 @@ class ImplicitTreap {
             int subtree_;
             bool is_reversed_;
 
-            Node(int value) : value_(value), left_(nullptr), right_(nullptr),
-                priority_((rand() << 16) ^ rand()), subtree_(1), is_reversed_(false) {}
+            explicit Node(int value) : value_(value), left_(nullptr),
+                right_(nullptr), priority_((rand() << 16) ^ rand()),
+                subtree_(1), is_reversed_(false) {}
         };
 
-        int GetSubtreeSize(Node* node) const {
+        int GetSubtreeSize(const Node* node) const {
             return node == nullptr ? 0 : node->subtree_;
         }
 
@@ -90,11 +75,10 @@ class ImplicitTreap {
             if (node == nullptr) {
                 return;
             }
-            node->subtree_ = 1 + GetSubtreeSize(node->left_)
-                             + GetSubtreeSize(node->right_);
+            node->subtree_ = 1 + GetSubtreeSize(node->left_) + GetSubtreeSize(node->right_);
         }
 
-        pair<Node*, Node*> Split(Node* node, int index) {
+        pair<Node*, Node*> Split(Node* node, const int index) {
             if (node == nullptr) {
                 return {nullptr, nullptr};
             }
@@ -140,7 +124,7 @@ class ImplicitTreap {
             }
         }
 
-        T FindValueFromIndex(Node* node, int index) {
+        T FindValueFromIndex(Node* node, const int index) {
             Propagate(node);
 
             int current_index = GetSubtreeSize(node->left_) + 1;

@@ -5,3 +5,6 @@ Input format:
 N M
 A line with N numbers representing the first array
 A line with M numbers representing the second array
+
+Output format:
+The size of the LCS

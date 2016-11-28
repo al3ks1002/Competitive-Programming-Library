@@ -1,5 +1,9 @@
 #include <stdio.h>
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <limits>
+#include <queue>
+#include <utility>
+#include <vector>
 
 using namespace std;
 
@@ -11,16 +15,13 @@ using namespace std;
 template<class F, class C>
 class MinCostMaxFlowGraph {
     public:
-        MinCostMaxFlowGraph(int num_vertices) : num_vertices_(num_vertices + 1) {
-            previous_vertex_.resize(num_vertices_);
-            distance_.resize(num_vertices_);
+        explicit MinCostMaxFlowGraph(const int num_vertices) : num_vertices_(num_vertices) {
+            previous_vertex_.resize(num_vertices_ + 1);
+            distance_.resize(num_vertices_ + 1);
         }
 
-        void AddEdge(int from, int to, F capacity, C cost) {
-            AddEdge(from, to, capacity, cost, 0);
-        }
-
-        void AddEdge(int from, int to, F capacity, C cost, int index) {
+        void AddEdge(const int from, const int to,
+                     const F capacity, const C cost, const int index) {
             neighbours_[from].push_back(to);
             capacity_[from][to] += capacity;
             cost_[from][to] += cost;
@@ -29,7 +30,11 @@ class MinCostMaxFlowGraph {
             index_[from][to] = index;
         }
 
-        pair<F, C> GetMinCostMaxFlow(int source, int sink) {
+        void AddEdge(const int from, const int to, const F capacity, const C cost) {
+            AddEdge(from, to, capacity, cost, 0);
+        }
+
+        pair<F, C> GetMinCostMaxFlow(const int source, const int sink) {
             F max_flow = 0;
             C min_cost = 0;
             while (PushFlow(source, sink)) {
@@ -57,19 +62,19 @@ class MinCostMaxFlowGraph {
             return make_pair(max_flow, min_cost);
         }
 
-        F GetFlow(int from, int to) const {
+        F GetFlow(const int from, const int to) const {
             return flow_[from][to];
         }
 
-        int GetIndex(int from, int to) const {
+        int GetIndex(const int from, const int to) const {
             return index_[from][to];
         }
 
     private:
-        bool PushFlow(int source, int sink) {
+        bool PushFlow(const int source, const int sink) {
             fill(previous_vertex_.begin(), previous_vertex_.end(), -1);
             fill(distance_.begin(), distance_.end(), numeric_limits<C>::max());
-            vector<bool> in_queue(num_vertices_, false);
+            vector<bool> in_queue(num_vertices_ + 1, false);
             queue<int> q;
 
             distance_[source] = 0;
@@ -106,7 +111,7 @@ class MinCostMaxFlowGraph {
         }
 
         static const int kMax = 355;
-        int num_vertices_;
+        const int num_vertices_;
         vector<int> neighbours_[kMax];
         F capacity_[kMax][kMax];
         F flow_[kMax][kMax];

@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
 
 using namespace std;
 
@@ -6,7 +8,7 @@ using namespace std;
 // It is slow if the number of sons is small (e.g binary trie).
 class Trie {
     public:
-        Trie(int alphabet_size, int alphabet_start) :
+        Trie(const int alphabet_size, const int alphabet_start) :
             alphabet_size_(alphabet_size), alphabet_start_(alphabet_start) {
             root_ = new Node(alphabet_size_);
         }
@@ -82,8 +84,8 @@ class Trie {
         }
 
         ~Trie() {
-            Clear();
-            delete root_;
+            /* Clear(); */
+            /* delete root_; */
         }
 
     private:
@@ -96,7 +98,7 @@ class Trie {
 
             vector<Node*> sons_;
 
-            Node(int alphabet_size) {
+            explicit Node(int alphabet_size) {
                 word_count_ = 0;
                 count_ = 0;
                 sons_.resize(alphabet_size);
@@ -104,7 +106,7 @@ class Trie {
             }
         };
 
-        void Dfs(Node* node, Node* father, int letter_from_father) {
+        void Dfs(Node* node, Node* father, const int letter_from_father) {
             int current_letter = 0;
             for (Node* son : node->sons_) {
                 if (son != nullptr) {
