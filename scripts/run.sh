@@ -6,10 +6,11 @@
 # Color codes for colored echo.
 RED='\033[0;31m'
 GREEN='\033[0;32m'
+NC='\033[0m'
 
 # Function needed to show the usage.
 usage() {
-    printf "${RED}Usage -s source_file -t tests_directory [-c checker].\n"
+    printf "${RED}Usage -s source_file -t tests_directory [-c checker].${NC}\n"
     exit 1
 }
 
@@ -20,7 +21,7 @@ check_not_empty() {
     string=$1
     file=$2
     if [[ -z $file ]]; then
-        printf "${RED}$string argument is mandatory.\n"
+        printf "${RED}$string argument is mandatory.${NC}\n"
         usage
         exit 1
     fi
@@ -33,7 +34,7 @@ check_if_exists() {
     string=$1
     file=$2
     if [[ ! -e $file ]]; then
-        printf "${RED}$file: $string does not exist.\n"
+        printf "${RED}$file: $string does not exist.${NC}\n"
         exit 1
     fi
 }
@@ -45,7 +46,7 @@ check_if_directory() {
     string=$1
     dir=$2
     if [[ ! -d $dir ]]; then
-        printf "${RED}$dir: $string is invalid.\n"
+        printf "${RED}$dir: $string is invalid.${NC}\n"
         exit 1
     fi
 }
@@ -58,7 +59,7 @@ compile() {
     executable=$2
     g++ -w -std=c++14 -O2 -o $executable $source
     if (( $? != 0 )); then
-        printf "${RED}$source: Compilation error.\n"
+        printf "${RED}$source: Compilation error.${NC}\n"
         exit 1
     fi
 }
@@ -127,7 +128,7 @@ run_test() {
     fi
 
     # Prints the test result.
-    printf "$message\n"
+    printf "$message${NC}\n"
 
     # Cleans the output.
     rm $output
@@ -150,11 +151,11 @@ main() {
                 checker=$OPTARG
                 ;;
             \?)
-                printf "${RED}Invalid option: -$OPTARG.\n" >&2
+                printf "${RED}Invalid option: -$OPTARG.${NC}\n" >&2
                 usage
                 ;;
             :)
-                printf "${RED}Option -$OPTARG requires an argument.\n" >&2
+                printf "${RED}Option -$OPTARG requires an argument.${NC}\n" >&2
                 usage
                 ;;
         esac
