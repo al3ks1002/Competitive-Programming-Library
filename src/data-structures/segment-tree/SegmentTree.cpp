@@ -42,7 +42,7 @@ class SegmentTree {
             Build(left_son, left, middle, v);
             Build(right_son, middle + 1, right, v);
 
-            segment_[node] = TreeFunction(segment_[left_son], segment_[right_son]);
+            Merge(node);
         }
 
         void Update(const int node, const int left, const int right,
@@ -62,10 +62,11 @@ class SegmentTree {
                 Update(right_son, middle + 1, right, position, value);
             }
 
-            segment_[node] = TreeFunction(segment_[left_son], segment_[right_son]);
+            Merge(node);
         }
 
-        T Query(const int node, const int left, const int right, const int a, const int b) const {
+        T Query(const int node, const int left, const int right, const int a,
+                const int b) const {
             if (left >= a && right <= b) {
                 return segment_[node];
             }
@@ -85,6 +86,13 @@ class SegmentTree {
             }
 
             return TreeFunction(x, y);
+        }
+
+        void Merge(int node) {
+            int left_son = 2 * node;
+            int right_son = 2 * node + 1;
+
+            segment_[node] = TreeFunction(segment_[left_son], segment_[right_son]);
         }
 
         T TreeFunction(const T x, const T y) const {
