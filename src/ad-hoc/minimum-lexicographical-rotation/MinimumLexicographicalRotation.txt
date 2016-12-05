@@ -1,0 +1,8 @@
+You are given a string with at most 10^5 characters.
+You need to print the minimum lexicographical rotation.
+
+Input format:
+the text
+
+Output format:
+the minimum lexicographical rotation
