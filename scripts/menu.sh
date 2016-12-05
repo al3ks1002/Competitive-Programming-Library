@@ -4,7 +4,7 @@
 
 index=0
 for file in $(find ../src -name "*.cpp" | sort); do
-    printf "${ORANGE}[$index] $file\n"
+    printf "[%s] $file\n" "$index"
     ((++index))
 done
 

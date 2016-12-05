@@ -17,18 +17,18 @@ NC='\033[0m'
 usage() {
     # -m stands for the menu: 1 - show menu, 0 - don't show.
     # -i stands for the source file index that you need to run.
-    printf "${RED}Usage [-m <0/1>] [-i index].${NC}\n"
+    printf "%bUsage [-m <0/1>] [-i index].%b\n" "$RED" "$NC"
     exit 1
 }
 
 # Reads the index from the keyboard.
 get_user_index() {
     while true; do
-        printf "\n${GREEN}Choose an index: ${NC}"
-        read user_index
+        printf "\n%bChoose an index: %b" "$GREEN" "$NC"
+        read -r user_index
 
         if [[ ! $user_index =~ ^[0-9]+$ ]] || ((user_index >= index)); then
-            printf "${RED}Invalid index.${NC}\n"
+            printf "%bInvalid index.%b\n" "$RED" "$NC"
         else
             break
         fi
@@ -43,13 +43,14 @@ run_program() {
     # Gets the source file.
     source_file=$2
 
-    printf "${PURPLE}Running: [$user_index] $source_file${NC}\n"
+    printf "%bRunning: [$user_index] $source_file%b\n" "$PURPLE" "$NC"
 
     # Gets the path.
-    path=$(echo $source_file | rev | cut --complement -d / -f 1 | rev)
+    path=$(echo "$source_file" | rev | cut --complement -d / -f 1 | rev)
 
     # Gets the test directory.
-    tests_dir=$(echo $path | sed 's/src/tests/1')
+    # tests_dir=$(echo $path | sed 's/src/tests/1')
+    tests_dir="${path//src/tests/}"
 
     # Gets the checker file.
     checker="${tests_dir}/checker.cpp"
@@ -63,7 +64,7 @@ run_program() {
     fi
 
     # Runs the source file.
-    eval $command
+    eval "$command"
 }
 
 main() {
@@ -82,11 +83,11 @@ main() {
                 user_index=$OPTARG
                 ;;
             \?)
-                printf "${RED}Invalid option: -$OPTARG${NC}\n" >&2
+                printf "%bInvalid option: -$OPTARG%b\n" "$RED" "$NC" >&2
                 usage
                 ;;
             :)
-                printf "${RED}Option -$OPTARG requires an argument.${NC}\n" >&2
+                printf "%bOption -$OPTARG requires an argument.%b\n" "$RED" "$NC" >&2
                 usage
                 ;;
         esac
@@ -97,8 +98,8 @@ main() {
 
     # Gets all the source files.
     for file in $(find ../src -name "*.cpp" | sort); do
-        if (( $menu != 0 )); then
-            printf "${ORANGE}[$index] $file${NC}\n"
+        if (( "$menu" != 0 )); then
+            printf "%b[$index] $file%b\n" "$ORANGE" "$NC"
         fi
         ((++index))
     done
@@ -109,7 +110,7 @@ main() {
         get_user_index
     else
         if [[ ! $user_index =~ ^[0-9]+$ ]] || ((user_index >= index)); then
-            printf "${RED}Invalid index.${NC}\n"
+            printf "%bInvalid index.%b\n" "$RED" "$NC"
             get_user_index
         fi
     fi
@@ -118,7 +119,7 @@ main() {
     index=0
     for file in $(find ../src -name "*.cpp" | sort); do
         if ((index == user_index)); then
-            run_program $user_index $file
+            run_program $user_index "$file"
             break
         fi
         ((++index))
