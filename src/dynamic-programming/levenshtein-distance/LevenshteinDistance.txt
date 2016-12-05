@@ -1,0 +1,9 @@
+You are given two strings with lowercase letters, both with length at most 2000.
+You need to find their Levenshtein distance (edit distance).
+
+Input format:
+first-string
+second-string
+
+Output format:
+distance
