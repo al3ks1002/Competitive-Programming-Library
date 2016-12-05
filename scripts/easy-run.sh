@@ -46,7 +46,7 @@ run_program() {
     printf "%bRunning: [$user_index] $source_file%b\n" "$PURPLE" "$NC"
 
     # Gets the path.
-    path=$(echo "$source_file" | rev | cut --complement -d / -f 1 | rev)
+    path=$(echo "$source_file" | rev | cut -d / -f 2- | rev)
 
     # Gets the test directory.
     # tests_dir=$(echo $path | sed 's/src/tests/1')
