@@ -1,0 +1,9 @@
+You are given a string of at most 10^5 characters.
+You need to print the total number of palindromes and the longest palindrome.
+
+Input format:
+the string
+
+Output format:
+the total number of palindromes
+the longest palindrome
