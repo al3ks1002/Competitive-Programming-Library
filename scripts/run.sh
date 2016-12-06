@@ -182,8 +182,16 @@ main() {
         compile "$checker" "checker_exec"
     fi
 
+
+    # Checks if the -V flag is available.
+    find_command="find $tests -name \"test*.in\" | sort"
+    if echo "1" | sort -V &> /dev/null; then
+        # If not, we don't sort by natural order.
+        find_command="$find_command -V"
+    fi
+
     # Goes through all the tests sorted numerically and runs the source file on them.
-    for input in $(find "$tests" -name "test*.in" | sort -V); do
+    for input in $(eval "$find_command"); do
         run_test "$input"
     done
 
