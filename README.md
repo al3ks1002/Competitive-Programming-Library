@@ -1,4 +1,4 @@
-# Library-for-Competitive-Programming
+# Competitive-Programming-Library
 
 A C++ library designed for usage in competitive programming.
 
@@ -8,8 +8,7 @@ Every algorithm/data structure has two directories:
 
 The tests are taken from [infoarena](http://www.infoarena.ro/) or are generated randomly (you also have a generator for those).
 
-If you want to modify or create your own implementation for an algorithm you can verify the correctness and the CPU time with "run.sh" or "easy-run.sh" scripts. You will need [dwdiff](https://linux.die.net/man/1/dwdiff) for comparing output and [gnusort](http://superuser.com/questions/349897/ls-version-number-sorting-mac-os-x/349904#349904) for sorting the tests. If you don't have gnusort, you can just remove -V flag from the scripts (sort -V). If you get an error regarding -std=c++14, just
-upgrade your g++.
+If you want to modify or create your own implementation for an algorithm you can verify the correctness and the CPU time with "run.sh" or "easy-run.sh" scripts. You will need [dwdiff](https://linux.die.net/man/1/dwdiff) for comparing output and [gnusort](http://superuser.com/questions/349897/ls-version-number-sorting-mac-os-x/349904#349904) for sorting the tests. If you don't have gnusort, your tests will still be evaluated, but not in order. If you get an error regarding -std=c++14, just upgrade your g++.
 
 There are some scripts that you can use:
 * "run.sh" - takes as arguments the source file (-s), the tests directory (-t) and optionally the checker (-t); example usage: ./run.sh -s my-source-file.cpp -d my-tests-directory/ -c my-checker.cpp;
