@@ -1,0 +1,11 @@
+You are given a string with at N (<= 10^5) lowercase letters and a number K (<= N).
+You need to:
+1. print the total number of substrings;
+2. print the length of the longest substring that appears in the string at least K times.
+
+Input format:
+K
+the string
+
+Output format:
+two lines representing the answers

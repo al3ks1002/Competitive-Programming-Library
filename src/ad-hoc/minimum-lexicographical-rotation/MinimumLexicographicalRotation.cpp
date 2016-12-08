@@ -20,7 +20,8 @@ class MinimumLexicographicalRotation {
             // are equal with the first match characters from text_[current_index]
             int match = 0;
 
-            while (current_index < (int)text_.size() / 2) {
+            while (current_index < (int)text_.size() / 2
+                    && minimum_rotation + match + 1 < (int)text_.size() / 2) {
                 if (text_[minimum_rotation + match] == text_[current_index + match]) {
                     match++;
                 } else if (text_[minimum_rotation + match] < text_[current_index + match]) {
