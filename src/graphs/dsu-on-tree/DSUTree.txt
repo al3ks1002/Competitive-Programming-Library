@@ -1,0 +1,12 @@
+You are given a tree with N (<= 10^5) vertices. Each vertex x has a color: c[x] (<= N).
+For each vertex, you need to print the sum of all dominating colors.
+A color c is dominating for vertex v if there are no other colors
+that appear in the subtree of vertex v more times than colour c.
+
+Input format:
+N
+A line with N numbers representing the colors.
+N - 1 lines representing edges from the tree.
+
+Output format:
+N numbers representing the answer for each vertex.
