@@ -21,6 +21,10 @@ class DisjointSet {
             return father_[x];
         }
 
+        void SetFather(const int x, const int y) {
+            father_[x] = y;
+        }
+
         // x and y must be roots
         void Unite(const int x, const int y) {
             if (rank_[x] < rank_[y]) {

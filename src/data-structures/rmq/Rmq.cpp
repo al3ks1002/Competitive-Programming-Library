@@ -8,6 +8,7 @@ class Rmq {
     public:
         Rmq() {}
 
+        // Must be indexed from 0.
         template<typename Array>
         Rmq(const int size, const Array& array, const vector<int>& key) :
             size_(size), lg_max_(GetLog(size)), key_(key) {
