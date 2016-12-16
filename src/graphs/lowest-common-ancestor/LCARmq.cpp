@@ -83,16 +83,28 @@ class LCATree {
         LCATree(const int num_vertices, const int root) :
             num_vertices_(num_vertices), root_(root), rmq_(nullptr) {
             sons_.resize(num_vertices_ + 1);
+            edges_.resize(num_vertices_ + 1);
         }
 
         void AddEdge(const int father, const int son) {
             sons_[father].push_back(son);
         }
 
+        void AddEdgeBidirectional(const int from, const int to) {
+            edges_[from].push_back(to);
+            edges_[to].push_back(from);
+        }
+
         void Precalculate() {
+            if (!edges_[root_].empty()) {
+                FindSons(root_, -1);
+            }
+
             first_apparition_.resize(num_vertices_ + 1, 0);
             level_.resize(num_vertices_ + 1, 0);
+
             DFS(root_);
+
             rmq_ = new Rmq<int>(euler_path_.size(), euler_path_, level_);
         }
 
@@ -107,6 +119,10 @@ class LCATree {
             return rmq_->Get(x, y);
         }
 
+        int GetDistance(const int x, const int y) const {
+            return level_[x] + level_[y] - 2 * level_[GetLCA(x, y)];
+        }
+
     private:
         void DFS(const int vertex) {
             euler_path_.push_back(vertex);
@@ -119,9 +135,19 @@ class LCATree {
             }
         }
 
+        void FindSons(const int vertex, const int father) {
+            for (auto son : edges_[vertex]) {
+                if (son != father) {
+                    sons_[vertex].push_back(son);
+                    FindSons(son, vertex);
+                }
+            }
+        }
+
         const int num_vertices_;
         const int root_;
         vector<vector<int>> sons_;
+        vector<vector<int>> edges_;
         vector<int> euler_path_;
         vector<int> first_apparition_;
         vector<int> level_;
