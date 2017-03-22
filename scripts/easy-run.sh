@@ -75,11 +75,11 @@ main() {
     while getopts ":m:i:" opt; do
         case $opt in
             m)
-                # Gets the source file.
+                # Gets the menu option.
                 menu=$OPTARG
                 ;;
             i)
-                # Gets the tests directory.
+                # Gets the user index.
                 user_index=$OPTARG
                 ;;
             \?)
