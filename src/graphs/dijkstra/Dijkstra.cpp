@@ -55,7 +55,7 @@ class DijkstraGraph {
         }
 
     private:
-        static const int kMaxInf = numeric_limits<T>::max();
+        static const T kMaxInf = numeric_limits<T>::max();
         const int num_vertices_;
         vector<vector<pair<int, T>>> edges_;
 };
